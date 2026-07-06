@@ -1,0 +1,16 @@
+{
+  "name": "fitflux",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev . --compatibility-date=2026-07-06",
+    "deploy": "wrangler pages deploy .",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260701.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.100.0"
+  }
+}

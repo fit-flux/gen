@@ -1,0 +1,17 @@
+name = "fitflux"
+compatibility_date = "2026-07-06"
+workers_dev = true
+
+# Secrets (required):
+# HUGGINGFACE_TOKEN — Hugging Face Access Token
+# Set via: wrangler pages secret put HUGGINGFACE_TOKEN
+#
+# Optional:
+# HF_MODEL — model ID on Hugging Face (default: black-forest-labs/FLUX.1-schnell)
+# HF_TIMEOUT_MS — upstream timeout in milliseconds (default: 60000)
+
+[vars]
+# No public vars needed for MVP.
+
+[observability]
+enabled = true
