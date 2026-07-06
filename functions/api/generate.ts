@@ -35,8 +35,8 @@ const ALLOWED_COLORS = [
 ];
 
 const DEFAULT_TIMEOUT_MS = 60_000;
-const PORTRAIT_WIDTH = 768;
-const PORTRAIT_HEIGHT = 1344;
+const PORTRAIT_WIDTH = 384;
+const PORTRAIT_HEIGHT = 672;
 
 function jsonResponse(body: unknown, init: ResponseInit = {}): Response {
   const headers = new Headers(init.headers);
@@ -117,12 +117,19 @@ function buildPrompt(body: GenerateRequest): string {
 
   const wearing = pieces.join(', ').replace(/, ([^,]+)$/, ', and $1');
 
+  // return (
+  //   `A full-body fashion photo of a person standing straight with a neutral expression, ` +
+  //   `shot from head to toe in a vertical portrait composition, ` +
+  //   `wearing ${wearing}. ` +
+  //   `Clean background, high detail, realistic lighting, full body shot. ` +
+  //   `Do not crop the head, legs, or feet. No close-up, no upper-body only.`
+  // );
+
+  // 短縮版プロンプト
   return (
-    `A full-body fashion photo of a person standing straight with a neutral expression, ` +
-    `shot from head to toe in a vertical portrait composition, ` +
-    `wearing ${wearing}. ` +
-    `Clean background, high detail, realistic lighting, full body shot. ` +
-    `Do not crop the head, legs, or feet. No close-up, no upper-body only.`
+    `A full-body photo of a person standing, ` +
+    `shot from head to toe, ` +
+    `wearing ${wearing}.`
   );
 }
 
