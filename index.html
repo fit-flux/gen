@@ -145,14 +145,6 @@
 
               <!-- Result actions -->
               <div id="result-section" class="hidden mt-10 space-y-6">
-                <button
-                  id="retry-button"
-                  type="button"
-                  class="w-full bg-white text-[#1a1a1a] font-medium text-sm tracking-wide h-[52px] rounded-sm border border-[#1a1a1a] hover:bg-[#f7f7f7] transition active:scale-[0.99]"
-                >
-                  もう一度作る
-                </button>
-
                 <details class="border-t border-[#e5e5e5] pt-4 group">
                   <summary
                     class="flex items-center justify-between cursor-pointer text-sm text-[#6b6b6b] hover:text-[#1a1a1a] transition"
@@ -253,8 +245,6 @@
       const resultSection = document.getElementById('result-section');
       const resultImage = document.getElementById('result-image');
       const resultPrompt = document.getElementById('result-prompt');
-      const retryButton = document.getElementById('retry-button');
-      const loadingOverlay = document.getElementById('loading-overlay');
       const cancelButton = document.getElementById('cancel-button');
       const errorToast = document.getElementById('error-toast');
       const errorMessage = document.getElementById('error-message');
@@ -389,15 +379,6 @@
       }
 
       form.addEventListener('submit', handleSubmit);
-
-      retryButton.addEventListener('click', () => {
-        resultSection.classList.add('hidden');
-        resultImage.classList.add('hidden');
-        resultImage.src = '';
-        imagePlaceholder.classList.remove('hidden');
-        imageCaption.classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
 
       cancelButton.addEventListener('click', () => {
         if (abortController) {
