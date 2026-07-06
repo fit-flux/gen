@@ -7,12 +7,12 @@ interface Env {
 }
 
 interface GenerateRequest {
-  hat: string;
-  hat_color: string;
-  eyewear: string;
-  eyewear_color: string;
-  outer: string;
-  outer_color: string;
+  hat?: string;
+  hat_color?: string;
+  eyewear?: string;
+  eyewear_color?: string;
+  outer?: string;
+  outer_color?: string;
   tops: string;
   tops_color: string;
   pants: string;
@@ -52,31 +52,45 @@ function validateRequest(body: unknown): GenerateRequest | { error: string } {
     return { error: 'リクエストの形式が正しくありません。' };
   }
 
-  const fields = [
-    'hat',
-    'hat_color',
-    'eyewear',
-    'eyewear_color',
-    'outer',
-    'outer_color',
-    'tops',
-    'tops_color',
-    'pants',
-    'pants_color',
-    'shoes',
-    'shoes_color',
-  ];
+  const requiredFields = ['tops', 'tops_color', 'pants', 'pants_color', 'shoes', 'shoes_color'] as const;
+  const optionalFields = ['hat', 'hat_color', 'eyewear', 'eyewear_color', 'outer', 'outer_color'] as const;
 
   const b = body as Record<string, unknown>;
-  for (const field of fields) {
+
+  for (const field of requiredFields) {
     if (typeof b[field] !== 'string' || b[field].trim() === '') {
       return { error: `「${field}」の入力が正しくありません。` };
     }
   }
 
-  for (const field of ['hat_color', 'eyewear_color', 'outer_color', 'tops_color', 'pants_color', 'shoes_color']) {
-    if (!ALLOWED_COLORS.includes(b[field] as string)) {
+  for (const field of requiredFields) {
+    if (field.endsWith('_color') && !ALLOWED_COLORS.includes(b[field] as string)) {
       return { error: `「${field}」は対応していない色です。` };
+    }
+  }
+
+  for (const field of optionalFields) {
+    if (field.endsWith('_color')) continue;
+    const value = b[field];
+    if (value === undefined || value === '') {
+      b[field] = '';
+      b[`${field}_color`] = '';
+      continue;
+    }
+    if (typeof value !== 'string') {
+      return { error: `「${field}」の入力が正しくありません。` };
+    }
+    const trimmed = value.trim();
+    if (trimmed === '') {
+      b[field] = '';
+      b[`${field}_color`] = '';
+      continue;
+    }
+    b[field] = trimmed;
+    const colorField = `${field}_color`;
+    const color = b[colorField];
+    if (typeof color !== 'string' || !ALLOWED_COLORS.includes(color)) {
+      return { error: `「${colorField}」は対応していない色です。` };
     }
   }
 
@@ -84,15 +98,29 @@ function validateRequest(body: unknown): GenerateRequest | { error: string } {
 }
 
 function buildPrompt(body: GenerateRequest): string {
+  const pieces: string[] = [];
+
+  if (body.hat?.trim()) {
+    pieces.push(`a ${body.hat_color} ${body.hat}`);
+  }
+  if (body.eyewear?.trim()) {
+    pieces.push(`${body.eyewear_color} ${body.eyewear} on the face`);
+  }
+  if (body.outer?.trim()) {
+    pieces.push(`a ${body.outer_color} ${body.outer}`);
+  }
+
+  // 必須アイテム
+  pieces.push(`a ${body.tops_color} ${body.tops}`);
+  pieces.push(`${body.pants_color} ${body.pants}`);
+  pieces.push(`${body.shoes_color} ${body.shoes}`);
+
+  const wearing = pieces.join(', ').replace(/, ([^,]+)$/, ', and $1');
+
   return (
     `A full-body fashion photo of a person standing straight with a neutral expression, ` +
     `shot from head to toe in a vertical portrait composition, ` +
-    `wearing a ${body.hat_color} ${body.hat}, ` +
-    `${body.eyewear_color} ${body.eyewear} on the face, ` +
-    `${body.outer_color} ${body.outer}, ` +
-    `${body.tops_color} ${body.tops}, ` +
-    `${body.pants_color} ${body.pants}, ` +
-    `and ${body.shoes_color} ${body.shoes}. ` +
+    `wearing ${wearing}. ` +
     `Clean background, high detail, realistic lighting, full body shot. ` +
     `Do not crop the head, legs, or feet. No close-up, no upper-body only.`
   );

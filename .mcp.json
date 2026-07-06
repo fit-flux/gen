@@ -1,0 +1,22 @@
+{
+  "name": "fitflux",
+  "version": "1.0.0",
+  "description": "FitFlux AI coordinate generation project configuration",
+  "project": {
+    "language": "typescript",
+    "framework": "cloudflare-pages-functions",
+    "frontend": "html-tailwind-vanilla-js",
+    "primary_model": "FLUX.1-schnell"
+  },
+  "tools": {
+    "preferred_shell": "bash",
+    "package_manager": "npm",
+    "type_checker": "tsc",
+    "deploy_command": "npm run deploy"
+  },
+  "constraints": {
+    "free_tier_first": true,
+    "no_external_paid_services": true,
+    "mobile_first": true
+  }
+}

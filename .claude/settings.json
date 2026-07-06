@@ -1,0 +1,20 @@
+{
+  "project": {
+    "name": "FitFlux",
+    "description": "AIコーディネート試着室。Cloudflare Pages Functions + Hugging Face FLUX.1-schnell",
+    "default_language": "ja",
+    "coding_assistant": "Kimi-k2.7 (Kimi Code)"
+  },
+  "context": {
+    "always_include": ["README.md", "architecture.md", "spec.md"],
+    "include_on_request": ["functions/api/generate.ts", "index.html"]
+  },
+  "commands": {
+    "enabled": ["commit", "test", "fix"]
+  },
+  "style": {
+    "minimal_changes": true,
+    "match_project_conventions": true,
+    "test_before_done": true
+  }
+}

@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build / dev outputs
+.wrangler/
+dist/
+.output/
+
+# Local env and secrets
+.dev.vars
+.dev.vars.example
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

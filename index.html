@@ -121,12 +121,12 @@
 
     <script>
       const CATEGORIES = [
-        { key: 'hat', label: '🧢', placeholder: 'cap', value: 'cap' },
-        { key: 'eyewear', label: '🕶', placeholder: 'sunglasses', value: 'sunglasses' },
-        { key: 'outer', label: '🧥', placeholder: 'MA-1 jacket', value: 'MA-1 jacket' },
-        { key: 'tops', label: '👕', placeholder: 'T-shirt', value: 'T-shirt' },
-        { key: 'pants', label: '👖', placeholder: 'denim', value: 'denim' },
-        { key: 'shoes', label: '👞', placeholder: 'sneakers', value: 'sneakers' },
+        { key: 'hat', label: '🧢', placeholder: 'cap', value: 'cap', optional: true },
+        { key: 'eyewear', label: '🕶', placeholder: 'sunglasses', value: 'sunglasses', optional: true },
+        { key: 'outer', label: '🧥', placeholder: 'MA-1 jacket', value: 'MA-1 jacket', optional: true },
+        { key: 'tops', label: '👕', placeholder: 'T-shirt', value: 'T-shirt', optional: false },
+        { key: 'pants', label: '👖', placeholder: 'denim', value: 'denim', optional: false },
+        { key: 'shoes', label: '👟', placeholder: 'sneakers', value: 'sneakers', optional: false },
       ];
 
       const DEFAULT_COLORS = {
@@ -168,29 +168,62 @@
           const colorOptions = COLORS.map(
             (c) => ` <option value="${c.value}"${DEFAULT_COLORS[cat.key] === c.value ? ' selected' : ''}>${c.label}</option>`
           ).join('');
+          const noneCheckbox = cat.optional
+            ? `<label class="flex items-center gap-1.5 text-sm text-gray-600 whitespace-nowrap cursor-pointer select-none">
+                 <input type="checkbox" id="${cat.key}_none" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+                 なし
+               </label>`
+            : '';
           return `
-            <div class="flex items-center gap-3">
-              <label for="${cat.key}" class="w-6 text-sm font-semibold text-gray-700 shrink-0">${cat.label}</label>
-              <input
-                type="text"
-                id="${cat.key}"
-                name="${cat.key}"
-                required
-                value="${cat.value}"
-                placeholder="${cat.placeholder}"
-                class="flex-1 min-w-0 rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none"
-              />
-              <select
-                id="${cat.key}_color"
-                name="${cat.key}_color"
-                required
-                class="w-24 rounded-xl border border-gray-300 px-3 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none bg-white"
-              >
-                ${colorOptions}
-              </select>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3">
+                <label for="${cat.key}" class="w-6 text-sm font-semibold text-gray-700 shrink-0">${cat.label}</label>
+                <input
+                  type="text"
+                  id="${cat.key}"
+                  name="${cat.key}"
+                  ${cat.optional ? '' : 'required'}
+                  value="${cat.value}"
+                  placeholder="${cat.placeholder}"
+                  class="flex-1 min-w-0 rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none"
+                />
+                <select
+                  id="${cat.key}_color"
+                  name="${cat.key}_color"
+                  ${cat.optional ? '' : 'required'}
+                  class="w-24 rounded-xl border border-gray-300 px-3 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none bg-white"
+                >
+                  ${colorOptions}
+                </select>
+                ${noneCheckbox}
+              </div>
             </div>
           `;
         }).join('');
+
+        // 「なし」チェックボックスのイベント設定
+        for (const cat of CATEGORIES) {
+          if (!cat.optional) continue;
+          const checkbox = document.getElementById(`${cat.key}_none`);
+          const input = document.getElementById(cat.key);
+          const colorSelect = document.getElementById(`${cat.key}_color`);
+          if (!checkbox || !input || !colorSelect) continue;
+
+          checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+              input.dataset.previousValue = input.value;
+              input.value = '';
+              input.disabled = true;
+              colorSelect.disabled = true;
+              colorSelect.classList.add('bg-gray-100', 'text-gray-400');
+            } else {
+              input.value = input.dataset.previousValue || cat.value;
+              input.disabled = false;
+              colorSelect.disabled = false;
+              colorSelect.classList.remove('bg-gray-100', 'text-gray-400');
+            }
+          });
+        }
       }
 
       function showLoading(show) {
