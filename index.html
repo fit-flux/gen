@@ -121,13 +121,22 @@
 
     <script>
       const CATEGORIES = [
-        { key: 'hat', label: '🧢 帽子', placeholder: '例: キャップ' },
-        { key: 'eyewear', label: '🕶 アイウェア', placeholder: '例: サングラス' },
-        { key: 'outer', label: '🧥 アウター', placeholder: '例: ma1 ジャケット' },
-        { key: 'tops', label: '👕 トップス', placeholder: '例: t シャツ' },
-        { key: 'pants', label: '👖 パンツ', placeholder: '例: デニム' },
-        { key: 'shoes', label: '👞 靴', placeholder: '例: スニーカー' },
+        { key: 'hat', label: '🧢 帽子', placeholder: 'cap', value: 'cap' },
+        { key: 'eyewear', label: '🕶 アイウェア', placeholder: 'sunglasses', value: 'sunglasses' },
+        { key: 'outer', label: '🧥 アウター', placeholder: 'MA-1 jacket', value: 'MA-1 jacket' },
+        { key: 'tops', label: '👕 トップス', placeholder: 'T-shirt', value: 'T-shirt' },
+        { key: 'pants', label: '👖 パンツ', placeholder: 'denim', value: 'denim' },
+        { key: 'shoes', label: '👞 靴', placeholder: 'sneakers', value: 'sneakers' },
       ];
+
+      const DEFAULT_COLORS = {
+        hat: 'black',
+        eyewear: 'black',
+        outer: 'black',
+        tops: 'white',
+        pants: 'blue',
+        shoes: 'white',
+      };
 
       const COLORS = [
         { value: 'white', label: '白' },
@@ -157,7 +166,7 @@
       function renderFields() {
         formFields.innerHTML = CATEGORIES.map((cat) => {
           const colorOptions = COLORS.map(
-            (c) => ` <option value="${c.value}">${c.label}</option>`
+            (c) => ` <option value="${c.value}"${DEFAULT_COLORS[cat.key] === c.value ? ' selected' : ''}>${c.label}</option>`
           ).join('');
           return `
             <div class="space-y-2">
@@ -168,6 +177,7 @@
                   id="${cat.key}"
                   name="${cat.key}"
                   required
+                  value="${cat.value}"
                   placeholder="${cat.placeholder}"
                   class="flex-1 min-w-0 rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none"
                 />

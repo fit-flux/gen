@@ -35,6 +35,8 @@ const ALLOWED_COLORS = [
 
 const DEFAULT_MODEL = 'black-forest-labs/FLUX.1-schnell';
 const DEFAULT_TIMEOUT_MS = 60_000;
+const PORTRAIT_WIDTH = 768;
+const PORTRAIT_HEIGHT = 1344;
 
 function jsonResponse(body: unknown, init: ResponseInit = {}): Response {
   const headers = new Headers(init.headers);
@@ -83,14 +85,16 @@ function validateRequest(body: unknown): GenerateRequest | { error: string } {
 
 function buildPrompt(body: GenerateRequest): string {
   return (
-    `A full-body fashion photo of a person, neutral expression, ` +
+    `A full-body fashion photo of a person standing straight with a neutral expression, ` +
+    `shot from head to toe in a vertical portrait composition, ` +
     `wearing a ${body.hat_color} ${body.hat}, ` +
-    `${body.eyewear_color} ${body.eyewear}, ` +
+    `${body.eyewear_color} ${body.eyewear} on the face, ` +
     `${body.outer_color} ${body.outer}, ` +
     `${body.tops_color} ${body.tops}, ` +
     `${body.pants_color} ${body.pants}, ` +
     `and ${body.shoes_color} ${body.shoes}. ` +
-    `Clean background, high detail, realistic lighting, full body shot.`
+    `Clean background, high detail, realistic lighting, full body shot. ` +
+    `Do not crop the head, legs, or feet. No close-up, no upper-body only.`
   );
 }
 
@@ -152,7 +156,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const prompt = buildPrompt(validated);
   const model = env.HF_MODEL || DEFAULT_MODEL;
   const timeoutMs = Number(env.HF_TIMEOUT_MS) || DEFAULT_TIMEOUT_MS;
-  const endpoint = `https://api-inference.huggingface.co/models/${model}`;
+  const endpoint = `https://router.huggingface.co/hf-inference/models/${model}`;
 
   try {
     const upstreamRes = await fetchWithTimeout(
@@ -163,7 +167,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ inputs: prompt }),
+        body: JSON.stringify({
+          inputs: prompt,
+          parameters: {
+            width: PORTRAIT_WIDTH,
+            height: PORTRAIT_HEIGHT,
+            num_inference_steps: 4,
+          },
+        }),
       },
       timeoutMs,
       request.signal,
@@ -203,7 +214,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const imageBuffer = await upstreamRes.arrayBuffer();
     const bytes = new Uint8Array(imageBuffer);
     const base64 = bytes.reduce((acc, byte) => acc + String.fromCharCode(byte), '');
-    const dataUrl = `data:image/png;base64,${btoa(base64)}`;
+    const contentType = upstreamRes.headers.get('content-type') || 'image/png';
+    const dataUrl = `data:${contentType};base64,${btoa(base64)}`;
 
     return jsonResponse({ image_url: dataUrl, prompt });
   } catch (err: unknown) {

@@ -10,7 +10,7 @@
 | 対象デバイス  | スマートフォン（モバイルファースト）                                                       |
 | 提供形態    | Web アプリ                                                                  |
 | 利用料金    | 開発者・エンドユーザーともに無料                                                         |
-| 画像生成モデル | FLUX.1-dev または FLUX.1-schnell（Hugging Face Inference API 無料枠）            |
+| 画像生成モデル | FLUX.1-schnell（Hugging Face Inference Providers / hf-inference）            |
 
 
 ## 2. 無料運用方針
@@ -19,15 +19,14 @@
 
 ### 2.1 画像生成コストの無料化
 
-- **第 1 選択**: Hugging Face Serverless Inference API の無料枠を使用
-  - モデル: `black-forest-labs/FLUX.1-dev` または `black-forest-labs/FLUX.1-schnell`
-  - エンドポイント: `https://api-inference.huggingface.co/models/{model_id}`
+- **採用 API**: Hugging Face Inference Providers の無料枠を使用
+  - モデル: `black-forest-labs/FLUX.1-schnell`
+  - エンドポイント: `https://router.huggingface.co/hf-inference/models/{model_id}`
   - 認証: Hugging Face Access Token（開発者が無料で発行）
 - **Rate Limit 対策**:
-  - 同一の組み合わせに対しては生成済み画像をキャッシュして再利用
-  - 生成リクエストを簡易キューで順次処理
-  - 超過時は「しばらくお待ちください」表示を出し、ポーリングで結果を待つ
-- **フォールバック**: FLUX.1-dev の無料枠が厳しい場合、生成速度の速い **FLUX.1-schnell** に切り替え可能にする
+  - 生成リクエストを単純な順次処理とし、超過時は「しばらくお待ちください」表示を出す
+  - MVP ではキャッシュ・キューは導入しない
+- **フォールバック**: `HF_MODEL` 環境変数で別のモデルに切り替え可能
 
 
 
@@ -36,11 +35,11 @@
 
 | 用途              | 推奨サービス                                  | 理由                           |
 | --------------- | --------------------------------------- | ---------------------------- |
-| フロントエンド         | Cloudflare Pages または GitHub Pages       | 静的ホスティングが無料                  |
-| バックエンド/API プロキシ | **Cloudflare Workers（Pages Functions）** | サーバーレス、無料枠あり、HF Token を秘匿できる |
+| フロントエンド         | Cloudflare Pages       | 静的ホスティングが無料                  |
+| バックエンド/API プロキシ | **Cloudflare Pages Functions** | サーバーレス、無料枠あり、HF Token を秘匿できる |
 
 
-**重要**: GitHub Pages だけでは API トークンを隠せないため、Hugging Face API をブラウザから直接呼び出す場合はトークンが露出する。MVP では **Cloudflare Pages + Cloudflare Workers（Pages Functions）** を採用し、HF Token は Workers の環境変数（シークレット）として管理する。
+**重要**: GitHub Pages だけでは API トークンを隠せないため、Hugging Face API はブラウザから直接呼び出さず、Cloudflare Pages Functions 経由で呼び出す。HF Token は Workers の環境変数（シークレット）として管理する。
 
 ## 3. ユーザー体験（UX）
 
@@ -50,18 +49,20 @@
 
 1. **トップ画面**
   - サービス名「FitFlux」とキャッチコピー
-  - 「コーディネートを作る」ボタン
+  - 入力フォームを同一画面に配置
 2. **入力画面**
   - 6 アイテムそれぞれに対し、自由入力欄と色選択ドロップダウンを配置
   - カテゴリー順: 🧢 帽子 → 🕶 アイウェア → 🧥 アウター → 👕 トップス → 👖 パンツ → 👞 靴
+  - 初期値は英語の例文をあらかじめ入力済み
 3. **生成中画面**
   - ローディングアニメーションと「コーディネートを提案中…」メッセージ
 4. **結果画面**
   - 生成された全身写真を中央に表示
+  - プロンプトを表示
 
 ### 3.2 入力方式
 
-- 各アイテムは**自由入力テキスト**（例: `ma1 ジャケット`、`黒いデニム`）
+- 各アイテムは**自由入力テキスト**（英語入力を推奨。例: `cap`、`sunglasses`、`MA-1 jacket`）
 - 色は**選択式ドロップダウン**から選ぶ
 - 選択可能な色（日本語 UI / 内部英語タグ）:
 
@@ -85,8 +86,8 @@
 
 - **人物が着用した全身写真**
 - 背景はシンプルな単色またはスタジオ風
-- モデル外見は MVP では固定:
-  - `full body shot`
+- アスペクト比は縦長 9:16（768×1344）で生成
+- プロンプトで `full body shot`、`head-to-toe`、`standing straight` を強調
 
 ## 4. プロンプト設計
 
@@ -95,17 +96,17 @@
 ### 4.1 基本プロンプトテンプレート
 
 ```text
-A full-body, wearing a {color_hat} {hat}, {color_eyewear} {eyewear}, {color_outer} {outer}, {color_tops} {tops}, {color_pants} {pants}, and {color_shoes} {shoes}. Clean background, high detail, realistic lighting, full body shot.
+A full-body fashion photo of a person standing straight with a neutral expression, shot from head to toe in a vertical portrait composition, wearing a {hat_color} {hat}, {eyewear_color} {eyewear} on the face, {outer_color} {outer}, {tops_color} {tops}, {pants_color} {pants}, and {shoes_color} {shoes}. Clean background, high detail, realistic lighting, full body shot. Do not crop the head, legs, or feet. No close-up, no upper-body only.
 ```
 
 
 
 ### 4.2 日本語入力の扱い
 
-- フロントエンドでは日本語のまま入力・表示する
-- バックエンドで日本語を英語タグに変換してプロンプトに埋め込む
+- フロントエンドでは日本語ラベルで表示する
+- ユーザー入力はプロンプトにそのまま埋め込む
 - 色は内部で英語タグを持ち、そのままプロンプトに使用する
-- 自由入力のテキストは、可能な範囲で英語に翻訳またはそのまま使用（FLUX は英語プロンプトを推奨）
+- FLUX は英語プロンプトを推奨するため、placeholder と初期値は英語とする
 
 
 
@@ -113,17 +114,17 @@ A full-body, wearing a {color_hat} {hat}, {color_eyewear} {eyewear}, {color_oute
 
 入力例:
 
-- 帽子: キャップ（赤）
-- アイウェア: サングラス（黒）
-- アウター: ma1 ジャケット（黒）
-- トップス: t シャツ（白）
-- パンツ: デニム（黒）
-- 靴: スニーカー（白）
+- 帽子: cap（黒）
+- アイウェア: sunglasses（黒）
+- アウター: MA-1 jacket（黒）
+- トップス: T-shirt（白）
+- パンツ: denim（青）
+- 靴: sneakers（白）
 
 生成プロンプト:
 
 ```text
-A full-body fashion photo of a slim East Asian person, neutral expression, wearing a red cap, black sunglasses, black MA-1 jacket, white t-shirt, black denim pants, and white sneakers. Clean background, high detail, realistic lighting, full body shot.
+A full-body fashion photo of a person standing straight with a neutral expression, shot from head to toe in a vertical portrait composition, wearing a black cap, black sunglasses on the face, black MA-1 jacket, white T-shirt, blue denim, and white sneakers. Clean background, high detail, realistic lighting, full body shot. Do not crop the head, legs, or feet. No close-up, no upper-body only.
 ```
 
 
@@ -137,12 +138,11 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 
 | レイヤー       | 技術                                                  |
 | ---------- | --------------------------------------------------- |
-| フロントエンド    | HTML / Tailwind CSS / Vanilla JavaScript（または React） |
-| バックエンド API | Cloudflare Workers（Pages Functions）                 |
-| 画像生成 API   | Hugging Face Inference API                          |
-| キャッシュ      | Cloudflare Workers KV（無料枠）                          |
+| フロントエンド    | HTML / Tailwind CSS / Vanilla JavaScript |
+| バックエンド API | Cloudflare Pages Functions                 |
+| 画像生成 API   | Hugging Face Inference Providers（hf-inference）  |
 | ホスティング     | Cloudflare Pages                                    |
-| バージョン管理    | GitHub（無料プライベートリポジトリ）                               |
+| バージョン管理    | Git                                |
 
 
 
@@ -156,16 +156,15 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 [Cloudflare Pages] ── 静的ファイル配信
        │
        ▼
-[Cloudflare Workers] ── API プロキシ
+[Cloudflare Pages Functions] ── API プロキシ
        │
        ├── Hugging Face Token（シークレット）
-       ├── KV キャッシュ（同じ組み合わせの画像 URL を保存）
        │
        ▼
-[Hugging Face Inference API]
+[Hugging Face Inference Providers]
        │
        ▼
-[FLUX.1-dev / FLUX.1-schnell]
+[FLUX.1-schnell]
 ```
 
 
@@ -181,15 +180,15 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 ```json
 {
   "hat": "cap",
-  "hat_color": "red",
+  "hat_color": "black",
   "eyewear": "sunglasses",
   "eyewear_color": "black",
   "outer": "MA-1 jacket",
   "outer_color": "black",
-  "tops": "t-shirt",
+  "tops": "T-shirt",
   "tops_color": "white",
-  "pants": "denim pants",
-  "pants_color": "black",
+  "pants": "denim",
+  "pants_color": "blue",
   "shoes": "sneakers",
   "shoes_color": "white"
 }
@@ -199,39 +198,38 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 
 ```json
 {
-  "image_url": "https://.../generated.png",
+  "image_url": "data:image/jpeg;base64,...",
   "prompt": "A full-body fashion photo of ..."
 }
 ```
 
 内部処理:
 
-1. リクエストからプロンプトを構築
-2. KV キャッシュに同じプロンプトの画像があればそれを返す
-3. なければ Hugging Face Inference API を呼び出し
-4. 生成された画像を一時的なストレージに保存（Base64 または一時 URL）
-5. 結果を KV にキャッシュし、画像 URL を返す
+1. リクエストをバリデーション
+2. プロンプトを構築
+3. Hugging Face Inference Providers を呼び出し（縦長 768×1344 で生成）
+4. 生成された画像を Base64 データ URL としてフロントエンドに返す
 
 
 
 ### 5.4 キャッシュ戦略（MVP）
 
-- MVP では画像の永続保存は行わず、生成された画像を Base64 データ URL としてフロントエンドに直接返す。
-- これにより KV などのストレージを用意せずに動作させ、コストと実装工数を抑える。
-- 将来的な拡張として、同じプロンプトに対しては KV キャッシュ（キー: SHA-256 ハッシュ、有効期限 24 時間）で画像 URL を保持し再利用する方針とする。
+- MVP では画像の永続保存は行わず、生成された画像を Base64 データ URL としてフロントエンドに直接返す
+- これにより KV などのストレージを用意せずに動作させ、コストと実装工数を抑える
+- 将来的な拡張として、同じプロンプトに対して KV キャッシュ（キー: SHA-256 ハッシュ、有効期限 24 時間）で画像 URL を保持し再利用する方針とする
 
 
 
 ### 5.5 本番環境 URL
 
-- **本番環境**: `https://gen.fitflux.workers.dev/`
-- フロントエンド・バックエンド API ともに本番環境として運用する。
+- **本番環境**: Cloudflare Pages へ `npm run deploy` でデプロイする
+- フロントエンド・バックエンド API ともに同一オリジンで運用する
 
 
 
 ### 5.6 参考実装
 
-- 本サービスの実装にあたっては、`/home/masasikatano/project/tarot` を参考にする。
+- 本サービスの実装にあたっては、`/home/masasikatano/project/tarot` を参考にする
 
 
 
@@ -240,9 +238,10 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 - ユーザー認証・アカウント機能
 - 生成履歴の永続化
 - 画像のダウンロード機能（ブラウザの長押し保存で代替）
-- 複数モデル選択
+- 複数モデル選択 UI
 - モデル外見のカスタマイズ
 - 課金・クレジット制
+- キャッシュ・キューによる Rate Limit 対策
 
 
 
@@ -269,7 +268,7 @@ A full-body fashion photo of a slim East Asian person, neutral expression, weari
 | FLUX.1-schnell | Apache 2.0                          | 商用利用可        |
 
 
-MVP では、無料かつ個人利用を想定し **FLUX.1-dev** を使うが、将来的な商用展開を見据えて **FLUX.1-schnell** への切り替えを容易にしておく。
+MVP では無料かつ個人利用を想定し **FLUX.1-schnell** をデフォルトで使用する。将来的な商用展開を見据えて `HF_MODEL` 環境変数での切り替えを容易にしておく。
 
 ## 8. 開発マイルストーン
 
@@ -277,8 +276,8 @@ MVP では、無料かつ個人利用を想定し **FLUX.1-dev** を使うが、
 | フェーズ  | 期間目安 | 内容                                        |
 | ----- | ---- | ----------------------------------------- |
 | Day 1 | 数時間  | プロトタイプ UI 作成、Cloudflare Pages デプロイ        |
-| Day 2 | 数時間  | Workers 経由で Hugging Face API 連携、プロンプト生成実装 |
-| Day 3 | 数時間  | KV キャッシュ、ローディング表示、エラーハンドリング実装             |
+| Day 2 | 数時間  | Pages Functions 経由で Hugging Face API 連携、プロンプト生成実装 |
+| Day 3 | 数時間  | 縦長画像生成、英語初期値設定、エラーハンドリング実装             |
 | Day 4 | 数時間  | スマホ表示調整、免責事項追加、軽微な修正                      |
 | Day 5 | 数時間  | 動作確認、Rate Limit テスト、ドキュメント整備              |
 
@@ -290,9 +289,9 @@ MVP では、無料かつ個人利用を想定し **FLUX.1-dev** を使うが、
 
 | リスク                 | 内容                  | 対策                          |
 | ------------------- | ------------------- | --------------------------- |
-| Hugging Face 無料枠の制限 | Rate Limit や待ち時間が発生 | キャッシュ、キュー、schnell へのフォールバック |
-| 画像生成の品質ブレ           | 自由入力によりプロンプトが不安定    | プロンプト例を UI に表示、固定モデル表現を使用   |
-| API トークンの漏洩         | ブラウザに露出すると危険        | Cloudflare Workers で秘匿管理    |
+| Hugging Face 無料枠の制限 | Rate Limit や待ち時間が発生 | シンプルなエラーメッセージ、モデル切り替え |
+| 画像生成の品質ブレ           | 自由入力によりプロンプトが不安定    | プロンプト例を UI に表示、全身・縦長を強調   |
+| API トークンの漏洩         | ブラウザに露出すると危険        | Cloudflare Pages Functions で秘匿管理    |
 | モバイル表示の崩れ           | 各種スマホサイズへの対応        | Tailwind CSS でレスポンシブ設計      |
 | 法的リスク               | AI 生成物の権利           | 免責事項・ライセンス表記を明確化            |
 
@@ -307,9 +306,10 @@ MVP では、無料かつ個人利用を想定し **FLUX.1-dev** を使うが、
 - プリセットコーディネート機能
 - SNS シェア機能
 - 広告収益化またはサブスクモデル
+- KV キャッシュによる画像再利用
 
 ---
 
 **作成日**: 2026-07-06  
 **サービス名**: FitFlux  
-**目的**: FLUX.1-dev / schnell を使った無料 AI コーディネート画像生成 Web サービスの MVP 仕様
+**目的**: FLUX.1-schnell を使った無料 AI コーディネート画像生成 Web サービスの MVP 仕様
