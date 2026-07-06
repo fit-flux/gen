@@ -27,10 +27,12 @@ const ALLOWED_COLORS = [
   'black',
   'red',
   'brown',
+  'beige',
   'yellow',
   'green',
   'blue',
   'purple',
+  'camouflage',
 ];
 
 const DEFAULT_MODEL = 'black-forest-labs/FLUX.1-schnell';
