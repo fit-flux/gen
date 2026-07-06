@@ -8,7 +8,7 @@ Cloudflare Pages Functions を使っており、フロントエンドは静的 H
 
 - Node.js（プロジェクトに合う LTS 版を推奨）
 - npm
-- [Hugging Face](https://huggingface.co/) アカウントと Access Token
+- [Pollinations](https://pollinations.ai/) アカウントと API Key（オプション）
 
 ## ローカル環境での動作確認
 
@@ -20,19 +20,19 @@ npm install
 
 ### 2. 環境変数の設定
 
-`.dev.vars.example` を `.dev.vars` にコピーし、Hugging Face の Access Token を設定します。
+`.dev.vars.example` を `.dev.vars` にコピーし、Pollinations API Key を設定します（キーがなくても無料で動作します）。
 
 ```bash
 cp .dev.vars.example .dev.vars
 ```
 
-`.dev.vars` を開いて、トークンを記入してください。
+`.dev.vars` を開いて、キーを記入してください。
 
 ```text
-HUGGINGFACE_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+POLLINATIONS_API_KEY=sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-トークンは [Hugging Face Settings > Access Tokens](https://huggingface.co/settings/tokens) から取得できます。
+キーは [enter.pollinations.ai](https://enter.pollinations.ai) から取得できます。キーなしでも FLUX 画像生成は無料で利用できますが、IP ベースのレート制限がかかります。
 
 ### 3. ローカルサーバーの起動
 
@@ -53,9 +53,9 @@ npm run dev
 
 ## 補足
 
-- `.dev.vars` はローカル開発用の環境変数ファイルです。本番環境では `wrangler pages secret put HUGGINGFACE_TOKEN` で設定してください。
-- 使用するモデルは `wrangler.toml` のコメント、または `HF_MODEL` 環境変数で変更できます。デフォルトは `black-forest-labs/FLUX.1-schnell` です。
-- 画像生成 API には Hugging Face Inference Providers の `router.huggingface.co` を使用しています。旧 `api-inference.huggingface.co` は廃止されているため注意してください。
+- `.dev.vars` はローカル開発用の環境変数ファイルです。本番環境では `wrangler pages secret put POLLINATIONS_API_KEY` で設定してください。
+- 画像生成 API には Pollinations の `gen.pollinations.ai` を使用しています。
+- Pollinations の FLUX 画像生成は無料で利用できますが、本番運用では `POLLINATIONS_API_KEY` を使用してレート制限を緩和することを推奨します。
 - 既存の `wrangler pages dev` プロセスが残っていると `Address already in use (127.0.0.1:8788)` エラーが出ます。`pkill -f workerd` や `pkill -f "wrangler pages dev"` で停止させてから再起動してください。
 
 ## 利用可能なスクリプト
@@ -83,9 +83,9 @@ pkill -f "wrangler pages dev"
 npx wrangler pages dev . --port 8789
 ```
 
-### DNS lookup failed / `api-inference.huggingface.co` に接続できない
+### `429 Too Many Requests`
 
-Hugging Face の旧 Inference API エンドポイントは廃止されました。最新のコードでは `https://router.huggingface.co/hf-inference/models/{model_id}` を使用しているので、コードを更新してください。
+Pollinations の無料エンドポイントは IP ベースのレート制限があります。しばらく経ってからお試しください。本番運用では `POLLINATIONS_API_KEY` を設定することを推奨します。
 
 ## 本番デプロイ
 
@@ -97,4 +97,4 @@ Cloudflare Pages へデプロイされます。初回は Cloudflare アカウン
 
 ## ライセンス
 
-本サービスで生成された画像は AI（FLUX.1-schnell など）による生成物です。画像の権利関係は各モデルのライセンスに従います。個人利用に限り自由に使用可能ですが、商用利用の可否は各モデルのライセンス条項をご確認ください。
+本サービスで生成された画像は AI（FLUX.1-schnell）による生成物です。画像の権利関係は各モデルのライセンスに従います。個人利用に限り自由に使用可能ですが、商用利用の可否は各モデルのライセンス条項をご確認ください。

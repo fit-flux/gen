@@ -1,7 +1,7 @@
 {
   "project": {
     "name": "FitFlux",
-    "description": "AIコーディネート試着室。Cloudflare Pages Functions + Hugging Face FLUX.1-schnell",
+    "description": "AIコーディネート試着室。Cloudflare Pages Functions + Pollinations FLUX",
     "default_language": "ja",
     "coding_assistant": "Kimi-k2.7 (Kimi Code)"
   },

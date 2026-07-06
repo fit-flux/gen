@@ -1,9 +1,8 @@
 import type { PagesFunction } from '@cloudflare/workers-types';
 
 interface Env {
-  HUGGINGFACE_TOKEN: string;
-  HF_MODEL?: string;
-  HF_TIMEOUT_MS?: string;
+  POLLINATIONS_API_KEY?: string;
+  POLLINATIONS_TIMEOUT_MS?: string;
 }
 
 interface GenerateRequest {
@@ -35,7 +34,6 @@ const ALLOWED_COLORS = [
   'camouflage',
 ];
 
-const DEFAULT_MODEL = 'black-forest-labs/FLUX.1-schnell';
 const DEFAULT_TIMEOUT_MS = 60_000;
 const PORTRAIT_WIDTH = 768;
 const PORTRAIT_HEIGHT = 1344;
@@ -162,15 +160,6 @@ export const onRequestOptions: PagesFunction<Env> = async () => {
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
 
-  const token = env.HUGGINGFACE_TOKEN;
-  if (!token) {
-    console.error('HUGGINGFACE_TOKEN is not configured');
-    return jsonResponse(
-      { error: 'サーバーの準備ができていません。しばらくしてからお試しください。' },
-      { status: 500 },
-    );
-  }
-
   let body: unknown;
   try {
     body = await request.json();
@@ -184,27 +173,23 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const prompt = buildPrompt(validated);
-  const model = env.HF_MODEL || DEFAULT_MODEL;
-  const timeoutMs = Number(env.HF_TIMEOUT_MS) || DEFAULT_TIMEOUT_MS;
-  const endpoint = `https://router.huggingface.co/hf-inference/models/${model}`;
+  const timeoutMs = Number(env.POLLINATIONS_TIMEOUT_MS) || DEFAULT_TIMEOUT_MS;
+
+  const endpoint = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}`;
+  const url = new URL(endpoint);
+  url.searchParams.set('model', 'flux');
+  url.searchParams.set('width', String(PORTRAIT_WIDTH));
+  url.searchParams.set('height', String(PORTRAIT_HEIGHT));
+  url.searchParams.set('seed', String(Math.floor(Math.random() * 1_000_000_000)));
+  if (env.POLLINATIONS_API_KEY) {
+    url.searchParams.set('key', env.POLLINATIONS_API_KEY);
+  }
 
   try {
     const upstreamRes = await fetchWithTimeout(
-      endpoint,
+      url.toString(),
       {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          inputs: prompt,
-          parameters: {
-            width: PORTRAIT_WIDTH,
-            height: PORTRAIT_HEIGHT,
-            num_inference_steps: 4,
-          },
-        }),
+        method: 'GET',
       },
       timeoutMs,
       request.signal,
@@ -212,26 +197,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     if (!upstreamRes.ok) {
       const errorText = await upstreamRes.text().catch(() => '');
-      console.error('Hugging Face upstream error', {
+      console.error('Pollinations upstream error', {
         status: upstreamRes.status,
         statusText: upstreamRes.statusText,
         body: errorText.slice(0, 500),
-        model,
+        prompt,
       });
 
       if (upstreamRes.status === 429 || upstreamRes.status === 503) {
-        let retryAfter = 60;
-        try {
-          const errBody = JSON.parse(errorText) as { estimated_time?: number };
-          if (typeof errBody.estimated_time === 'number' && errBody.estimated_time > 0) {
-            retryAfter = Math.ceil(errBody.estimated_time);
-          }
-        } catch {
-          // ignore parse errors
-        }
         return jsonResponse(
           { error: '画像生成サービスが混雑しています。しばらく経ってからお試しください。' },
-          { status: 503, headers: { 'Retry-After': String(retryAfter) } },
+          { status: 503, headers: { 'Retry-After': String(60) } },
         );
       }
 
@@ -250,7 +226,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return jsonResponse({ image_url: dataUrl, prompt });
   } catch (err: unknown) {
     const error = err as { name?: string; message?: string };
-    console.error('Generate proxy error', { name: error?.name, message: error?.message, model });
+    console.error('Generate proxy error', { name: error?.name, message: error?.message, prompt });
     if (error?.name === 'AbortError') {
       return jsonResponse(
         { error: '画像生成が時間内に終わりませんでした。もう一度お試しください。' },

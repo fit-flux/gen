@@ -16,7 +16,7 @@ FitFlux は、ユーザーが選択した帽子・アイウェア・アウター
 | --- | --- |
 | フロントエンド | HTML / Tailwind CSS / Vanilla JavaScript |
 | バックエンド API | Cloudflare Pages Functions (`functions/api/generate.ts`) |
-| 画像生成 API | Hugging Face Inference Providers (`router.huggingface.co`) |
+| 画像生成 API | Pollinations (`gen.pollinations.ai`) |
 | ホスティング | Cloudflare Pages |
 | 言語 | TypeScript |
 
@@ -33,7 +33,7 @@ FitFlux は、ユーザーが選択した帽子・アイウェア・アウター
 ## 作業上の注意
 
 1. **無料枠優先**: 本プロジェクトは開発者・エンドユーザーも無料で利用できることを最優先します。有料サービスや有料モデルの導入は避けてください。
-2. **HF Token の秘匿**: `HUGGINGFACE_TOKEN` は `.dev.vars`（ローカル）または Wrangler Secret（本番）で管理し、フロントエンドやコミットに含めないでください。
+2. **API Key の秘匿**: `POLLINATIONS_API_KEY` は `.dev.vars`（ローカル）または Wrangler Secret（本番）で管理し、フロントエンドやコミットに含めないでください。キーがなくても FLUX 画像生成は無料で動作します。
 3. **プロンプトの一貫性**: 画像生成プロンプトは `buildPrompt()` 関数で構築します。`full body shot`、`head-to-toe`、`standing straight` 等のキーワードは維持してください。
 4. **縦長画像**: 出力サイズは `768×1344`（9:16）を標準とします。
 5. **色の許可リスト**: `white`, `gray`, `black`, `red`, `brown`, `yellow`, `green`, `blue`, `purple` のみを有効とします（`ALLOWED_COLORS`）。
@@ -45,7 +45,7 @@ FitFlux は、ユーザーが選択した帽子・アイウェア・アウター
 ```bash
 npm install
 cp .dev.vars.example .dev.vars
-# .dev.vars に HUGGINGFACE_TOKEN を記入
+# .dev.vars に POLLINATIONS_API_KEY を記入（オプション）
 npm run dev
 ```
 
@@ -55,4 +55,4 @@ npm run dev
 npm run deploy
 ```
 
-本番では `wrangler pages secret put HUGGINGFACE_TOKEN` でシークレットを設定してください。
+本番では `wrangler pages secret put POLLINATIONS_API_KEY` でシークレットを設定してください（必須ではありませんが推奨）。

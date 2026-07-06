@@ -7,7 +7,7 @@
 - [Cloudflare](https://dash.cloudflare.com/) アカウント
 - このリポジトリのクローンまたはソースコード
 - Node.js（プロジェクトに合う LTS 版を推奨）と npm
-- [Hugging Face](https://huggingface.co/) アカウントと Access Token
+- [Pollinations](https://pollinations.ai/) アカウントと API Key（オプションだが本番では推奨）
 
 ## 1. ローカルでビルド・型チェックを確認
 
@@ -63,43 +63,25 @@ npx wrangler pages deploy . --project-name fitflux
 
 ## 4. 本番シークレットの設定
 
-本番環境では `.dev.vars` は使われません。プロジェクト作成後に `npx wrangler pages secret put` で `HUGGINGFACE_TOKEN` を登録してください。プロジェクト名は `wrangler.toml` の `name` と一致させるか、`--project-name` で明示的に指定します。
+本番環境では `.dev.vars` は使われません。プロジェクト作成後に `npx wrangler pages secret put` で `POLLINATIONS_API_KEY` を登録してください（必須ではありませんが推奨）。プロジェクト名は `wrangler.toml` の `name` と一致させるか、`--project-name` で明示的に指定します。
 
 ```bash
-npx wrangler pages secret put HUGGINGFACE_TOKEN --project-name fitflux
+npx wrangler pages secret put POLLINATIONS_API_KEY --project-name fitflux
 npm run deploy
 ```
 
 シークレットは設定後、再デプロイしないと Cloudflare Pages Functions に反映されません。登録直後に「サーバーの準備ができていません」と表示された場合は、再デプロイで解消します。
 
-### Hugging Face Access Token の取得
+### Pollinations API Key の取得
 
-1. [Hugging Face Settings > Access Tokens](https://huggingface.co/settings/tokens) を開く
-2. 「Create new token」を選択
-3. 権限は `Make calls to the serverless Inference API` が必要です
-4. 生成されたトークンをコピーして、`npx wrangler pages secret put HUGGINGFACE_TOKEN --project-name fitflux` で登録し、その後 `npm run deploy` で再デプロイしてください
+1. [enter.pollinations.ai](https://enter.pollinations.ai) を開く
+2. 「Create New Key」または「Secret Key」を選択
+3. 名前を入力してキーを生成
+4. 生成された `sk_...` キーをコピーして、`npx wrangler pages secret put POLLINATIONS_API_KEY --project-name fitflux` で登録し、その後 `npm run deploy` で再デプロイしてください
 
 ## 5. 使用モデルの確認・変更
 
-デフォルトでは `black-forest-labs/FLUX.1-schnell` を使用します。必要に応じて `wrangler.toml` の環境変数で変更できます。
-
-```toml
-[vars]
-HF_MODEL = "black-forest-labs/FLUX.1-schnell"
-```
-
-または、本番用シークレット/変数として個別に設定することも可能です。
-
-```bash
-npx wrangler pages secret put HF_MODEL --project-name fitflux
-```
-
-その他のオプション変数:
-
-| 変数名 | 用途 | デフォルト |
-| --- | --- | --- |
-| `HF_MODEL` | Hugging Face 上のモデル ID | `black-forest-labs/FLUX.1-schnell` |
-| `HF_TIMEOUT_MS` | 画像生成 API のタイムアウト（ミリ秒） | `60000` |
+Pollinations の画像生成エンドポイント `https://gen.pollinations.ai/image/{prompt}` を使用します。デフォルトで FLUX モデルが選択されます。画像サイズは 768×1344（9:16）で固定です。
 
 ## 6. 本番デプロイ
 
@@ -136,7 +118,7 @@ Cloudflare Pages ダッシュボードからカスタムドメインを紐づけ
 
 ### デプロイは成功したが画像が生成されない / 「サーバーの準備ができていません」と表示される
 
-`HUGGINGFACE_TOKEN` が本番環境に正しく設定されているか確認してください。
+`POLLINATIONS_API_KEY` が本番環境に正しく設定されているか確認してください。
 
 ```bash
 npx wrangler pages secret list --project-name fitflux
@@ -152,23 +134,27 @@ npm run deploy
 
 ### `Unauthorized` / `401` エラー
 
-Hugging Face Access Token が無効、期限切れ、または必要な権限が付与されていない可能性があります。新しいトークンを発行し、本番シークレットを更新してから再デプロイしてください。
+Pollinations API Key が無効、期限切れ、または必要な権限が付与されていない可能性があります。新しいキーを発行し、本番シークレットを更新してから再デプロイしてください。
 
 ```bash
-npx wrangler pages secret put HUGGINGFACE_TOKEN --project-name fitflux
+npx wrangler pages secret put POLLINATIONS_API_KEY --project-name fitflux
 npm run deploy
 ```
 
-### `DNS lookup failed` / `router.huggingface.co` に接続できない
+### `429 Too Many Requests`
 
-Cloudflare Workers/Pages Functions から外部 API への接続がブロックされていないか確認してください。通常は追加設定は不要ですが、Enterprise プランなどで明示的なアウトバウンド制限をかけている場合は `router.huggingface.co` への HTTPS アクセスを許可してください。
+Pollinations の無料エンドポイントは IP ベースのレート制限があります。本番運用では `POLLINATIONS_API_KEY` を設定してください。
+
+### `DNS lookup failed` / `gen.pollinations.ai` に接続できない
+
+Cloudflare Workers/Pages Functions から外部 API への接続がブロックされていないか確認してください。通常は追加設定は不要ですが、Enterprise プランなどで明示的なアウトバウンド制限をかけている場合は `gen.pollinations.ai` への HTTPS アクセスを許可してください。
 
 ### タイムアウトが頻発する
 
-画像生成に時間がかかるモデルの場合、`HF_TIMEOUT_MS` を大きくしてください。変更後は再デプロイが必要です。
+画像生成に時間がかかる場合、`POLLINATIONS_TIMEOUT_MS` を大きくしてください。変更後は再デプロイが必要です。
 
 ```bash
-npx wrangler pages secret put HF_TIMEOUT_MS --project-name fitflux
+npx wrangler pages secret put POLLINATIONS_TIMEOUT_MS --project-name fitflux
 npm run deploy
 # 例: 120000
 ```
@@ -181,9 +167,9 @@ npm run deploy
 
 ## セキュリティと運用
 
-- `HUGGINGFACE_TOKEN` は絶対にクライアント側やリポジトリに含めないでください。本番では必ず `npx wrangler pages secret` 経由で管理してください。
+- `POLLINATIONS_API_KEY` は絶対にクライアント側やリポジトリに含めないでください。本番では必ず `npx wrangler pages secret` 経由で管理してください。
 - `.dev.vars` はローカル開発専用です。`.gitignore` に含まれていることを確認してください。
-- 本番 URL を公開する場合、Hugging Face の利用料・レート制限に注意してください。必要に応じてアクセス制限や監視を検討してください。
+- 本番 URL を公開する場合、Pollinations の利用料・レート制限に注意してください。必要に応じてアクセス制限や監視を検討してください。
 - MVP では画像を永続保存しません。生成結果を保持したい場合は、別途ストレージ（R2/KV など）への保存機能を追加してください。
 
 ## シークレット変更後の反映

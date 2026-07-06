@@ -15,13 +15,13 @@ FitFlux は、ユーザーが選んだ帽子・アイウェア・アウター・
        ▼
 [Cloudflare Pages Functions] ── /api/generate
        │
-       ├── HUGGINGFACE_TOKEN（Wrangler Secret / .dev.vars）
+       ├── POLLINATIONS_API_KEY（Wrangler Secret / .dev.vars、オプション）
        │
        ▼
-[Hugging Face Inference Providers]
+[Pollinations AI]
        │
        ▼
-[FLUX.1-schnell]
+[FLUX]
 ```
 
 ## レイヤー構成
@@ -29,8 +29,8 @@ FitFlux は、ユーザーが選んだ帽子・アイウェア・アウター・
 | レイヤー | 責務 | 実装 |
 | --- | --- | --- |
 | フロントエンド | 入力フォーム、生成結果表示、ローディング UI | `index.html` |
-| API プロキシ | リクエスト検証、プロンプト構築、HF API 呼び出し、トークン秘匿 | `functions/api/generate.ts` |
-| 画像生成 | 縦長全身写真の生成 | Hugging Face `black-forest-labs/FLUX.1-schnell` |
+| API プロキシ | リクエスト検証、プロンプト構築、Pollinations API 呼び出し、オプションの API Key 秘匿 | `functions/api/generate.ts` |
+| 画像生成 | 縦長全身写真の生成 | Pollinations `gen.pollinations.ai/image/{prompt}` |
 | ホスティング | 静的ファイル + サーバーレス関数の配信 | Cloudflare Pages |
 
 ## API エンドポイント
@@ -69,7 +69,7 @@ FitFlux は、ユーザーが選んだ帽子・アイウェア・アウター・
 
 1. リクエストをバリデーション
 2. プロンプトを構築
-3. Hugging Face Inference Providers を呼び出し（縦長 768×1344）
+3. Pollinations 画像生成 API を呼び出し（縦長 768×1344）
 4. 生成された画像を Base64 データ URL として返却
 
 ## プロンプト設計
@@ -88,7 +88,7 @@ Do not crop the head, legs, or feet. No close-up, no upper-body only.
 
 ## セキュリティとコスト
 
-- `HUGGINGFACE_TOKEN` は Cloudflare Pages Functions の環境変数（シークレット）として管理し、ブラウザに露出させません。
+- `POLLINATIONS_API_KEY` は Cloudflare Pages Functions の環境変数（シークレット）として管理し、ブラウザに露出させません。キーがなくても FLUX 画像生成は無料で利用できますが、本番運用ではキーを使用することを推奨します。
 - MVP では画像を永続保存せず、Base64 データ URL で直接返却します。これにより KV 等のストレージコストを回避します。
 - Rate Limit 対策はシンプルなエラーメッセージ表示に留め、キューイングやキャッシュは MVP では導入しません。
 
