@@ -212,7 +212,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       }
 
       return jsonResponse(
-        { error: '画像の生成に失敗しました。もう一度お試しください。' },
+        { error: 'サービスが混雑しております。時間をおいてからもう一度お試しください。' },
         { status: 502 },
       );
     }
@@ -229,7 +229,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     console.error('Generate proxy error', { name: error?.name, message: error?.message, prompt });
     if (error?.name === 'AbortError') {
       return jsonResponse(
-        { error: '画像生成が時間内に終わりませんでした。もう一度お試しください。' },
+        { error: 'サービスが混雑しております。時間をおいてからお試しください。' },
         { status: 504 },
       );
     }

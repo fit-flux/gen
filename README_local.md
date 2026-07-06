@@ -26,13 +26,15 @@ npm install
 cp .dev.vars.example .dev.vars
 ```
 
-`.dev.vars` を開いて、キーを記入してください。
+`.dev.vars` を開いて、必要な環境変数を記入してください。
 
 ```text
 POLLINATIONS_API_KEY=sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+POLLINATIONS_TIMEOUT_MS=300000
 ```
 
-キーは [enter.pollinations.ai](https://enter.pollinations.ai) から取得できます。キーなしでも FLUX 画像生成は無料で利用できますが、IP ベースのレート制限がかかります。
+- `POLLINATIONS_API_KEY` は [enter.pollinations.ai](https://enter.pollinations.ai) から取得できます。キーなしでも FLUX 画像生成は無料で利用できますが、IP ベースのレート制限がかかります。
+- `POLLINATIONS_TIMEOUT_MS` は Pollinations への画像生成待ち時間（ミリ秒）です。デフォルトは 60 秒ですが、混雑時にタイムアウトする場合は 300000（5 分）などに延ばしてください。
 
 ### 3. ローカルサーバーの起動
 
