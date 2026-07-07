@@ -1,13 +1,13 @@
 {
   "project": {
     "name": "FitFlux",
-    "description": "AIコーディネート試着室。Cloudflare Pages Functions + Pollinations FLUX",
+    "description": "AIコーディネート試着室。静的HTMLのみで構成され、あらかじめGeminiで生成した画像を静的配信します。",
     "default_language": "ja",
-    "coding_assistant": "Kimi-k2.7 (Kimi Code)"
+    "coding_assistant": "Antigravity"
   },
   "context": {
     "always_include": ["README.md", "architecture.md", "spec.md"],
-    "include_on_request": ["functions/api/generate.ts", "index.html"]
+    "include_on_request": ["index.html", "scripts/outfit-config.mjs", "scripts/generate-outfits.mjs"]
   },
   "commands": {
     "enabled": ["commit", "test", "fix"]

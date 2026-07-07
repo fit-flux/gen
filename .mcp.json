@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "FitFlux AI coordinate generation project configuration",
   "project": {
-    "language": "typescript",
-    "framework": "cloudflare-pages-functions",
+    "language": "javascript",
+    "framework": "cloudflare-pages-static",
     "frontend": "html-tailwind-vanilla-js",
-    "primary_model": "FLUX.1-schnell"
+    "image_generator": "gemini",
+    "primary_model": "gemini-2.5-flash-image"
   },
   "tools": {
     "preferred_shell": "bash",
@@ -16,7 +17,6 @@
   },
   "constraints": {
     "free_tier_first": true,
-    "no_external_paid_services": true,
     "mobile_first": true
   }
 }

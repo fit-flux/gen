@@ -2,7 +2,9 @@
 
 ## サービス概要
 
-FitFlux は、ユーザーが選んだ帽子・アイウェア・アウター・トップス・パンツ・靴と色をもとに、AI がそのコーディネートを着用した全身写真を生成するスマホ向け Web サービスです。
+FitFlux は、ユーザーが選んだトップスとパンツの色に合わせて、AI が着用した全身写真を即座に表示するスマホ向け Web サービスです。
+
+現在の実装は **静的 HTML のみ** で構成されており、実行時のバックエンド API はありません。すべてのコーディネート画像は `generated/` にあらかじめ生成済みです。
 
 ## システム構成図
 
@@ -10,99 +12,114 @@ FitFlux は、ユーザーが選んだ帽子・アイウェア・アウター・
 [スマホブラウザ]
        │
        ▼
-[Cloudflare Pages] ── 静的ファイル配信（index.html）
-       │
-       ▼
-[Cloudflare Pages Functions] ── /api/generate
-       │
-       ├── POLLINATIONS_API_KEY（Wrangler Secret / .dev.vars、オプション）
-       │
-       ▼
-[Pollinations AI]
-       │
-       ▼
-[FLUX]
+[Cloudflare Pages] ── 静的ファイル配信（index.html + generated/）
 ```
 
 ## レイヤー構成
 
 | レイヤー | 責務 | 実装 |
 | --- | --- | --- |
-| フロントエンド | 入力フォーム、生成結果表示、ローディング UI | `index.html` |
-| API プロキシ | リクエスト検証、プロンプト構築、Pollinations API 呼び出し、オプションの API Key 秘匿 | `functions/api/generate.ts` |
-| 画像生成 | 縦長全身写真の生成 | Pollinations `gen.pollinations.ai/image/{prompt}` |
-| ホスティング | 静的ファイル + サーバーレス関数の配信 | Cloudflare Pages |
+| フロントエンド | 入力フォーム、画像表示、ローディング UI | `index.html` |
+| 画像素材 | あらかじめ生成した縦長全身写真の静的配信 | `generated/*.webp` |
+| 画像生成 | Gemini API で全パターンを生成・加工 | `scripts/generate-outfits.mjs` |
+| 設定・プロンプト | カテゴリー、色、プロンプト、ファイル名の単一情報源 | `scripts/outfit-config.mjs` |
+| ホスティング | 静的ファイルの配信 | Cloudflare Pages |
 
-## API エンドポイント
+## ファイル構成
 
-### `POST /api/generate`
-
-リクエストボディ例:
-
-```json
-{
-  "hat": "cap",
-  "hat_color": "black",
-  "eyewear": "sunglasses",
-  "eyewear_color": "black",
-  "outer": "MA-1 jacket",
-  "outer_color": "black",
-  "tops": "T-shirt",
-  "tops_color": "white",
-  "pants": "denim",
-  "pants_color": "blue",
-  "shoes": "sneakers",
-  "shoes_color": "white"
-}
+```
+.
+├── index.html              # フロントエンド UI
+├── scripts/
+│   ├── outfit-config.mjs   # カテゴリー / 色 / プロンプト / ファイル名
+│   └── generate-outfits.mjs # Gemini による画像生成スクリプト
+├── generated/
+│   ├── *.webp              # 生成済みコーディネート画像（49 枚）
+│   ├── manifest.json       # 生成済み画像のメタデータ
+│   └── failed.json         # 生成失敗したパターンの記録
+├── wrangler.toml           # Cloudflare Pages 設定
+├── package.json            # npm スクリプト
+└── tsconfig.json           # scripts/**/*.mjs の型チェック
 ```
 
-レスポンス例:
+## 入力と画像の対応
 
-```json
-{
-  "image_url": "data:image/jpeg;base64,...",
-  "prompt": "A full-body fashion photo of ..."
-}
-```
+フロントエンドでは以下の 2 カテゴリーの色を選択できます。
 
-内部処理:
+| カテゴリー | 項目 | 選択可能な色 |
+| --- | --- | --- |
+| トップス | T-shirt | white, gray, beige, brown, black, blue, green |
+| パンツ | short chino pants | white, gray, beige, brown, black, blue, green |
 
-1. リクエストをバリデーション
-2. プロンプトを構築
-3. Pollinations 画像生成 API を呼び出し（縦長 768×1344）
-4. 生成された画像を Base64 データ URL として返却
+組み合わせは 7 × 7 = **49 通り**。ファイル名は `{topsColor}-{pantsColor}.webp` です。
 
 ## プロンプト設計
 
-基本テンプレート:
+基本テンプレートは `scripts/outfit-config.mjs` の `buildPrompt()` で構築します。
 
 ```text
-A full-body fashion photo of a person standing straight with a neutral expression,
-shot from head to toe in a vertical portrait composition,
-wearing {組み立てた衣装列}.
-Clean background, high detail, realistic lighting, full body shot.
-Do not crop the head, legs, or feet. No close-up, no upper-body only.
+A full-body photo of a young man standing straight, facing the camera,
+shot from head to toe,
+wearing a {topsColor} T-shirt and {pantsColor} short chino pants.
+Summer outfit, clean light background, natural lighting, realistic.
+Full body, head to toe, entire head and hair visible,
+do not crop the head or feet, male model.
 ```
 
-必須アイテムは `tops`, `pants`, `shoes` で、`hat`, `eyewear`, `outer` は任意です。
+必須キーワードは維持します。
+
+- `full body shot` / `head to toe` / `standing straight`
+- `do not crop the head or feet`
+
+## 画像生成フロー
+
+`npm run generate` の実行時のみ動作します。
+
+1. `scripts/outfit-config.mjs` から全 49 通りの組み合わせを取得
+2. Gemini (`gemini-2.5-flash-image`) にプロンプトを送信
+3. 返却された画像を `sharp` で 9:16（576×1024）にクロップ・リサイズ
+4. `generated/{topsColor}-{pantsColor}.webp` として保存
+5. `generated/manifest.json` / `generated/failed.json` を更新
+
+本番環境ではこのスクリプトは実行されず、`generated/` 内の画像が静的ファイルとして配信されます。
+
+## ローカル開発
+
+```bash
+npm install
+cp .dev.vars.example .dev.vars
+# .dev.vars に GEMINI_API_KEY を記入（画像生成時のみ必要）
+npm run dev
+```
+
+デフォルトは `http://localhost:8788` です。
+
+## 本番デプロイ
+
+```bash
+npm run deploy
+```
+
+Cloudflare Pages へ静的サイトとしてデプロイされます。本番では API Key 等のシークレット設定は不要です。
 
 ## セキュリティとコスト
 
-- `POLLINATIONS_API_KEY` は Cloudflare Pages Functions の環境変数（シークレット）として管理し、ブラウザに露出させません。キーがなくても FLUX 画像生成は無料で利用できますが、本番運用ではキーを使用することを推奨します。
-- MVP では画像を永続保存せず、Base64 データ URL で直接返却します。これにより KV 等のストレージコストを回避します。
-- Rate Limit 対策はシンプルなエラーメッセージ表示に留め、キューイングやキャッシュは MVP では導入しません。
+- `GEMINI_API_KEY` は画像生成スクリプトのみが使用します。`.dev.vars` でローカル管理し、ブラウザやコミットに含めません。
+- 本番では外部 API を呼び出さないため、シークレット設定は不要です。
+- 画像は `generated/` に永続保存し、同じパターンの再生成を防ぎます。
 
-## 今後の拡張（MVP スコープ外）
+## 今後の拡張（現スコープ外）
 
-- KV キャッシュによる同じプロンプトの画像再利用
-- ユーザー認証と生成履歴の永続化
 - 性別・体型の選択
+- アイテムカテゴリーの追加（帽子・アイウェア・アウター・靴）
+- 複数バリエーション画像の表示
 - プリセットコーディネート
 - SNS シェア
 
 ## 関連ドキュメント
 
-- `spec.md` — サービス仕様書
 - `README.md` — プロジェクト概要・開発手順
-- `functions/api/generate.ts` — API 実装
+- `spec.md` — サービス仕様書（MVP 策定時のドキュメント）
+- `.claude/skills/fitflux.md` — AI アシスタント向けの作業ガイド
 - `index.html` — フロントエンド実装
+- `scripts/outfit-config.mjs` — 衣装・プロンプト定義
