@@ -49,7 +49,7 @@ npm run dev
 1. ブラウザで `http://localhost:8788` を開きます。
 2. 各アイテムの種類と色を入力・選択します。初期値として英語の例文が入っています。
 3. 「コーディネートを生成」ボタンを押します。
-4. AI が 768×1344 の縦長全身写真を生成し、画面下部に表示されれば OK です。
+4. AI が 384×672 の縦長全身写真を生成し、画面下部に表示されれば OK です。
 
 画像生成には 20〜40 秒ほどかかることがあります。
 
@@ -82,6 +82,17 @@ npx wrangler pages dev . --port 8789
 
 Pollinations の無料エンドポイントは IP ベースのレート制限があります。しばらく経ってからお試しください。本番運用では `POLLINATIONS_API_KEY` を設定することを推奨します。
 
+### `502 Bad Gateway`（Pollinations から `402 Payment Required`）
+
+API Key に紐づく Pollinations アカウントの pollen 残高が不足していると、画像生成時に `502 Bad Gateway` が返されます。これは Worker が Pollinations からの `402 Payment Required` をプロキシしている状態です。
+
+Pollinations の無料 tier では pollen が**毎時間自動でリロード**されます（Microbe/Spore tier では 0.01 pollen/時間）。リクエスト 1 件あたりのコストを抑えるため、必要に応じて `functions/api/generate.ts` の画像サイズ（`PORTRAIT_WIDTH` / `PORTRAIT_HEIGHT`）を小さくしてください。サイズを小さくすると 1 リクエストの pollen 消費量が減り、無料枠内でより多く生成できます。
+
+また、以下のいずれかでも対応可能です。
+
+- `.dev.vars` から `POLLINATIONS_API_KEY` を削除し、IP ベースの無料モードに戻す
+- [enter.pollinations.ai](https://enter.pollinations.ai) でアカウントに pollen をチャージする
+
 ## 本番デプロイ
 
 ```bash
@@ -108,7 +119,7 @@ wrangler pages secret put POLLINATIONS_TIMEOUT_MS
 - 変更は最小限にとどめ、既存の構成・命名規則に合わせてください。
 - 変更後は `npm run check` で型チェックを必ず実行してください。
 - `POLLINATIONS_API_KEY` は絶対にコードやログに出力しないでください。
-- プロンプト構築ロジックを変更する場合は、`full body shot` / `head-to-toe` / 縦長 768×1344 という要件を維持してください。
+- プロンプト構築ロジックを変更する場合は、`full body shot` / `head-to-toe` / 縦長 384×672 という要件を維持してください。
 - 詳細なプロジェクト規約は `.claude/skills/fitflux.md` と `architecture.md` を参照してください。
 
 ## ライセンス
