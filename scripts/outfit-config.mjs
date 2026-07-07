@@ -16,7 +16,7 @@ export const DEFAULT_COLORS = {
 export const COLORS = [
   { value: 'white', label: '白' },
   { value: 'gray', label: 'グレー' },
-  { value: 'beige', label: '駱駝' },
+  { value: 'beige', label: 'カーキ' },
   { value: 'brown', label: '茶' },
   { value: 'black', label: '黒' },
   { value: 'blue', label: '青' },
