@@ -1,0 +1,383 @@
+{
+  "version": 1,
+  "images": {
+    "white-white.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-white.webp",
+      "updatedAt": "2026-07-07T04:54:48.572Z"
+    },
+    "white-gray.webp": {
+      "topsColor": "white",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-gray.webp",
+      "updatedAt": "2026-07-07T04:54:49.238Z"
+    },
+    "white-beige.webp": {
+      "topsColor": "white",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-beige.webp",
+      "updatedAt": "2026-07-07T04:54:55.565Z"
+    },
+    "white-brown.webp": {
+      "topsColor": "white",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-brown.webp",
+      "updatedAt": "2026-07-07T04:54:55.976Z"
+    },
+    "white-black.webp": {
+      "topsColor": "white",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-black.webp",
+      "updatedAt": "2026-07-07T04:55:04.586Z"
+    },
+    "white-green.webp": {
+      "topsColor": "white",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-green.webp",
+      "updatedAt": "2026-07-07T04:55:10.892Z"
+    },
+    "white-blue.webp": {
+      "topsColor": "white",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/white-blue.webp",
+      "updatedAt": "2026-07-07T04:55:04.832Z"
+    },
+    "gray-white.webp": {
+      "topsColor": "gray",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-white.webp",
+      "updatedAt": "2026-07-07T04:55:11.612Z"
+    },
+    "gray-gray.webp": {
+      "topsColor": "gray",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-gray.webp",
+      "updatedAt": "2026-07-07T04:55:17.547Z"
+    },
+    "gray-beige.webp": {
+      "topsColor": "gray",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-beige.webp",
+      "updatedAt": "2026-07-07T04:55:20.042Z"
+    },
+    "gray-brown.webp": {
+      "topsColor": "gray",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-brown.webp",
+      "updatedAt": "2026-07-07T04:55:24.018Z"
+    },
+    "gray-blue.webp": {
+      "topsColor": "gray",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-blue.webp",
+      "updatedAt": "2026-07-07T04:55:31.066Z"
+    },
+    "gray-black.webp": {
+      "topsColor": "gray",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-black.webp",
+      "updatedAt": "2026-07-07T04:55:27.421Z"
+    },
+    "gray-green.webp": {
+      "topsColor": "gray",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a gray T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/gray-green.webp",
+      "updatedAt": "2026-07-07T04:55:34.195Z"
+    },
+    "beige-white.webp": {
+      "topsColor": "beige",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-white.webp",
+      "updatedAt": "2026-07-07T04:55:37.445Z"
+    },
+    "beige-gray.webp": {
+      "topsColor": "beige",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-gray.webp",
+      "updatedAt": "2026-07-07T04:55:40.152Z"
+    },
+    "beige-beige.webp": {
+      "topsColor": "beige",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-beige.webp",
+      "updatedAt": "2026-07-07T04:55:44.815Z"
+    },
+    "beige-brown.webp": {
+      "topsColor": "beige",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-brown.webp",
+      "updatedAt": "2026-07-07T04:55:46.513Z"
+    },
+    "beige-black.webp": {
+      "topsColor": "beige",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-black.webp",
+      "updatedAt": "2026-07-07T04:55:54.313Z"
+    },
+    "beige-blue.webp": {
+      "topsColor": "beige",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-blue.webp",
+      "updatedAt": "2026-07-07T04:55:53.181Z"
+    },
+    "beige-green.webp": {
+      "topsColor": "beige",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a beige T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/beige-green.webp",
+      "updatedAt": "2026-07-07T04:56:00.167Z"
+    },
+    "brown-white.webp": {
+      "topsColor": "brown",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-white.webp",
+      "updatedAt": "2026-07-07T04:56:00.907Z"
+    },
+    "brown-gray.webp": {
+      "topsColor": "brown",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-gray.webp",
+      "updatedAt": "2026-07-07T04:56:07.300Z"
+    },
+    "brown-beige.webp": {
+      "topsColor": "brown",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-beige.webp",
+      "updatedAt": "2026-07-07T04:56:09.218Z"
+    },
+    "brown-brown.webp": {
+      "topsColor": "brown",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-brown.webp",
+      "updatedAt": "2026-07-07T04:56:14.036Z"
+    },
+    "brown-black.webp": {
+      "topsColor": "brown",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-black.webp",
+      "updatedAt": "2026-07-07T04:56:15.327Z"
+    },
+    "brown-blue.webp": {
+      "topsColor": "brown",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-blue.webp",
+      "updatedAt": "2026-07-07T04:56:20.563Z"
+    },
+    "brown-green.webp": {
+      "topsColor": "brown",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a brown T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/brown-green.webp",
+      "updatedAt": "2026-07-07T04:56:22.366Z"
+    },
+    "black-white.webp": {
+      "topsColor": "black",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-white.webp",
+      "updatedAt": "2026-07-07T04:56:26.578Z"
+    },
+    "black-gray.webp": {
+      "topsColor": "black",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-gray.webp",
+      "updatedAt": "2026-07-07T04:56:29.854Z"
+    },
+    "black-beige.webp": {
+      "topsColor": "black",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-beige.webp",
+      "updatedAt": "2026-07-07T04:56:33.237Z"
+    },
+    "black-brown.webp": {
+      "topsColor": "black",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-brown.webp",
+      "updatedAt": "2026-07-07T04:56:36.281Z"
+    },
+    "black-black.webp": {
+      "topsColor": "black",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-black.webp",
+      "updatedAt": "2026-07-07T04:56:39.791Z"
+    },
+    "black-blue.webp": {
+      "topsColor": "black",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-blue.webp",
+      "updatedAt": "2026-07-07T04:56:42.897Z"
+    },
+    "black-green.webp": {
+      "topsColor": "black",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a black T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/black-green.webp",
+      "updatedAt": "2026-07-07T04:56:46.582Z"
+    },
+    "blue-white.webp": {
+      "topsColor": "blue",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-white.webp",
+      "updatedAt": "2026-07-07T04:56:49.816Z"
+    },
+    "blue-gray.webp": {
+      "topsColor": "blue",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-gray.webp",
+      "updatedAt": "2026-07-07T04:56:53.557Z"
+    },
+    "blue-beige.webp": {
+      "topsColor": "blue",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-beige.webp",
+      "updatedAt": "2026-07-07T04:56:56.812Z"
+    },
+    "blue-brown.webp": {
+      "topsColor": "blue",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-brown.webp",
+      "updatedAt": "2026-07-07T04:56:59.877Z"
+    },
+    "blue-black.webp": {
+      "topsColor": "blue",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-black.webp",
+      "updatedAt": "2026-07-07T04:57:03.425Z"
+    },
+    "blue-blue.webp": {
+      "topsColor": "blue",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-blue.webp",
+      "updatedAt": "2026-07-07T04:57:07.069Z"
+    },
+    "blue-green.webp": {
+      "topsColor": "blue",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a blue T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/blue-green.webp",
+      "updatedAt": "2026-07-07T04:57:09.680Z"
+    },
+    "green-white.webp": {
+      "topsColor": "green",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-white.webp",
+      "updatedAt": "2026-07-07T04:57:14.991Z"
+    },
+    "green-gray.webp": {
+      "topsColor": "green",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and gray short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-gray.webp",
+      "updatedAt": "2026-07-07T04:57:18.506Z"
+    },
+    "green-beige.webp": {
+      "topsColor": "green",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and beige short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-beige.webp",
+      "updatedAt": "2026-07-07T04:57:22.629Z"
+    },
+    "green-brown.webp": {
+      "topsColor": "green",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and brown short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-brown.webp",
+      "updatedAt": "2026-07-07T04:57:24.814Z"
+    },
+    "green-black.webp": {
+      "topsColor": "green",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and black short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-black.webp",
+      "updatedAt": "2026-07-07T04:57:31.563Z"
+    },
+    "green-blue.webp": {
+      "topsColor": "green",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and blue short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-blue.webp",
+      "updatedAt": "2026-07-07T04:57:31.135Z"
+    },
+    "green-green.webp": {
+      "topsColor": "green",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a green T-shirt and green short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model.",
+      "path": "/generated/green-green.webp",
+      "updatedAt": "2026-07-07T04:57:37.685Z"
+    },
+    "white-white-v1.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model. (variation 1)",
+      "path": "/generated/white-white-v1.webp",
+      "updatedAt": "2026-07-07T05:06:35.530Z"
+    },
+    "white-white-v2.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model. (variation 2)",
+      "path": "/generated/white-white-v2.webp",
+      "updatedAt": "2026-07-07T05:06:42.146Z"
+    },
+    "white-white-v3.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model. (variation 3)",
+      "path": "/generated/white-white-v3.webp",
+      "updatedAt": "2026-07-07T05:06:48.893Z"
+    },
+    "white-white-v4.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model. (variation 4)",
+      "path": "/generated/white-white-v4.webp",
+      "updatedAt": "2026-07-07T05:06:56.111Z"
+    },
+    "white-white-v5.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young man standing straight, facing the camera, shot from head to toe, wearing a white T-shirt and white short chino pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, male model. (variation 5)",
+      "path": "/generated/white-white-v5.webp",
+      "updatedAt": "2026-07-07T05:07:02.347Z"
+    }
+  }
+}

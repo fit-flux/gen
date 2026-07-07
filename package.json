@@ -6,10 +6,17 @@
   "scripts": {
     "dev": "wrangler pages dev . --compatibility-date=2026-07-06",
     "deploy": "wrangler pages deploy .",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "generate": "node scripts/generate-outfits.mjs"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260701.0",
+    "@google/genai": "^0.10.0",
+    "@types/node": "^26.1.0",
+    "dotenv": "^16.5.0",
+    "p-limit": "^6.2.0",
+    "puppeteer": "^25.3.0",
+    "sharp": "^0.34.2",
     "typescript": "^5.8.3",
     "wrangler": "^4.100.0"
   }

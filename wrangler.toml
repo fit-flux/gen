@@ -2,16 +2,8 @@ name = "fitflux"
 pages_build_output_dir = "."
 compatibility_date = "2026-07-06"
 
-# Secrets (optional but recommended for production):
-# POLLINATIONS_API_KEY — Pollinations secret key (sk_...)
-# Get a key at: https://enter.pollinations.ai
-# Set via: npx wrangler pages secret put POLLINATIONS_API_KEY --project-name fitflux
-#
-# Optional:
-# POLLINATIONS_TIMEOUT_MS — upstream timeout in milliseconds (default: 60000)
-
 [vars]
-# No public vars needed for MVP.
+# No public vars needed.
 
 [observability]
 enabled = true
