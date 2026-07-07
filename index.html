@@ -80,7 +80,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-24">
           <!-- Image panel -->
-          <div class="order-2 lg:order-1 lg:row-span-2 lg:sticky lg:top-28 lg:self-start">
+          <div class="order-1 lg:order-none lg:col-start-1 lg:row-span-3 lg:sticky lg:top-28 lg:self-start">
             <figure
               id="image-stage"
               class="relative mx-auto aspect-[9/16] max-h-[60vh] lg:max-h-[75vh] w-full max-w-md lg:max-w-none bg-[#f7f7f7] border border-[#e5e5e5] overflow-hidden"
@@ -113,8 +113,8 @@
             </figure>
           </div>
 
-          <!-- Form / Details panel -->
-          <div class="order-1 lg:order-2 lg:col-start-2 lg:w-full lg:mt-0">
+          <!-- Intro panel -->
+          <div class="order-4 lg:order-none lg:col-start-2 lg:row-start-1">
             <div class="max-w-xl lg:max-w-none mx-auto">
               <div class="mb-8">
                 <p class="text-xs tracking-widest text-[#6b6b6b] uppercase mb-2">FitFlux Fitting Room</p>
@@ -125,7 +125,12 @@
                   トップスとパンツの色を選ぶとトータルバランスを考慮したコーディネートを提案します。
                 </p>
               </div>
+            </div>
+          </div>
 
+          <!-- Form / Details panel -->
+          <div class="order-2 lg:order-none lg:col-start-2 lg:row-start-2 lg:w-full lg:mt-0">
+            <div class="max-w-xl lg:max-w-none mx-auto">
               <!-- Input form -->
               <form id="fitflux-form" class="space-y-6">
                 <div class="border-t border-[#e5e5e5] pt-6">
@@ -163,45 +168,45 @@
           </div>
 
           <!-- Coming soon items -->
-          <div class="order-3 lg:order-3 lg:col-start-2">
+          <div class="order-3 lg:order-none lg:col-start-2 lg:row-start-3">
             <div class="max-w-xl lg:max-w-none mx-auto">
               <div class="space-y-4 mt-10 pt-6 border-t border-dashed border-[#e5e5e5]">
                 <h3 class="text-xs tracking-widest text-[#6b6b6b] uppercase">UPCOMING ITEMS</h3>
 
-                <div class="grid grid-cols-1 sm:grid-cols-[4rem_1fr_1fr_auto] gap-3 items-center opacity-60">
-                  <label class="text-sm text-[#1a1a1a] font-medium">キャップ</label>
-                  <select disabled class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed">
+                <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                  <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">キャップ</label>
+                  <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
                     <option>白</option>
                   </select>
-                  <input type="text" disabled value="Cap" class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed" />
-                  <span class="text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  <input type="text" disabled value="Cap" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                  <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-[4rem_1fr_1fr_auto] gap-3 items-center opacity-60">
-                  <label class="text-sm text-[#1a1a1a] font-medium">アイウェア</label>
-                  <select disabled class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed">
+                <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                  <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">アイウェア</label>
+                  <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
                     <option>白</option>
                   </select>
-                  <input type="text" disabled value="Sunglasses" class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed" />
-                  <span class="text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  <input type="text" disabled value="Sunglasses" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                  <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-[4rem_1fr_1fr_auto] gap-3 items-center opacity-60">
-                  <label class="text-sm text-[#1a1a1a] font-medium">上着</label>
-                  <select disabled class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed">
+                <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                  <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">上着</label>
+                  <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
                     <option>白</option>
                   </select>
-                  <input type="text" disabled value="Jacket" class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed" />
-                  <span class="text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  <input type="text" disabled value="Jacket" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                  <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-[4rem_1fr_1fr_auto] gap-3 items-center opacity-60">
-                  <label class="text-sm text-[#1a1a1a] font-medium">シューズ</label>
-                  <select disabled class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed">
+                <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                  <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">シューズ</label>
+                  <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
                     <option>白</option>
                   </select>
-                  <input type="text" disabled value="Sneakers" class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed" />
-                  <span class="text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  <input type="text" disabled value="Sneakers" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                  <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
                 </div>
               </div>
             </div>
@@ -294,23 +299,23 @@
           ).join('');
 
           return `
-            <div class="grid grid-cols-1 sm:grid-cols-[4rem_1fr_1fr] gap-3 items-center">
-              <label for="${cat.key}" class="text-sm text-[#1a1a1a] font-medium">${cat.label}</label>
+            <div class="flex gap-2 sm:gap-3 items-center">
+              <label for="${cat.key}" class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">${cat.label}</label>
               <select
                 id="${cat.key}_color"
                 name="${cat.key}_color"
-                class="w-full rounded-sm border border-[#e5e5e5] bg-white px-3 py-2.5 text-sm text-[#1a1a1a] focus:border-[#1a1a1a] focus:ring-1 focus:ring-[#1a1a1a] outline-none transition"
+                class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-white px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#1a1a1a] focus:border-[#1a1a1a] focus:ring-1 focus:ring-[#1a1a1a] outline-none transition"
               >
                 ${colorOptions}
-              </select>              <input
+              </select>
+              <input
                 type="text"
                 id="${cat.key}"
                 name="${cat.key}"
                 readonly
                 value="${cat.value}"
-                class="w-full rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-3 py-2.5 text-sm text-[#6b6b6b] cursor-not-allowed opacity-60"
+                class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed opacity-60"
               />
-
             </div>
           `;
         }).join('');
