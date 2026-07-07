@@ -7,7 +7,8 @@
     "dev": "wrangler pages dev . --compatibility-date=2026-07-06",
     "deploy": "wrangler pages deploy .",
     "check": "tsc --noEmit",
-    "generate": "node scripts/generate-outfits.mjs"
+    "generate": "node scripts/generate-outfits.mjs",
+    "generate:women": "node scripts/generate-outfits.mjs --women"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260701.0",

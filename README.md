@@ -37,6 +37,8 @@ GEMINI_API_KEY=AIzaSy...
 
 ### 3. 画像の生成（初回または再生成時）
 
+#### メンズ版
+
 全 49 パターンの画像を `generated/` に生成します。
 
 ```bash
@@ -55,6 +57,21 @@ npm run generate -- --limit 1
 npm run generate -- --force
 ```
 
+#### レディース版
+
+全 49 パターンの画像を `generated/women/` に生成します。
+
+```bash
+npm run generate:women
+```
+
+テスト生成・強制再生成も同様に `--limit` / `--force` が使えます。
+
+```bash
+npm run generate:women -- --limit 1
+npm run generate:women -- --force
+```
+
 ### 4. ローカルサーバーの起動
 
 ```bash
@@ -65,9 +82,10 @@ npm run dev
 
 ### 5. 動作確認
 
-1. ブラウザで `http://localhost:8788` を開きます。
+1. ブラウザで `http://localhost:8788/men` を開きます（`/` から `/men` へリダイレクトされます）。
 2. トップスとパンツの色を選びます。
 3. 選んだ組み合わせに対応した 576×1024 の縦長全身写真が即座に表示されれば OK です。
+4. 同様に `http://localhost:8788/women` でもレディース版が表示されることを確認します。
 
 ## 利用可能なスクリプト
 
@@ -76,7 +94,8 @@ npm run dev
 | `npm run dev` | ローカル開発サーバーを `localhost:8788` で起動 |
 | `npm run check` | TypeScript の型チェックを実行 |
 | `npm run deploy` | Cloudflare Pages へデプロイ |
-| `npm run generate` | Gemini API で全コーディネート画像を生成 |
+| `npm run generate` | Gemini API でメンズ版コーディネート画像を生成 |
+| `npm run generate:women` | Gemini API でレディース版コーディネート画像を生成 |
 
 ## トラブルシューティング
 
@@ -99,7 +118,7 @@ npx wrangler pages dev . --port 8789
 
 - `.dev.vars` に正しい `GEMINI_API_KEY` が設定されているか確認してください。
 - Gemini API の無料枠を超えている場合は、しばらく経ってからお試しください。
-- `generated/failed.json` に失敗したパターンが記録されます。原因を確認し、必要に応じて再生成してください。
+- `generated/failed.json`（または `generated/women/failed.json`）に失敗したパターンが記録されます。原因を確認し、必要に応じて再生成してください。
 
 ## 本番デプロイ
 

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FitFlux — レディースコーディネート提案</title>
+    <meta
+      name="description"
+      content="ブラウスとパンツの色を選ぶと、女性の全身写真コーディネートを提案します。"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-bg: #ffffff;
+        --color-bg-soft: #f7f7f7;
+        --color-text: #1a1a1a;
+        --color-muted: #6b6b6b;
+        --color-border: #e5e5e5;
+        --color-accent: #1a1a1a;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: var(--color-bg);
+        color: var(--color-text);
+      }
+
+      .font-display {
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      }
+
+      .spinner {
+        border: 2px solid rgba(26, 26, 26, 0.15);
+        border-left-color: #1a1a1a;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* セレクトボックスの矢印を控えめに */
+      select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+
+      details > summary {
+        list-style: none;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#e5e5e5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="/women" class="font-display text-2xl tracking-widest text-[#1a1a1a]">FitFlux</a>
+        <nav class="flex items-center gap-4 text-xs tracking-wide">
+          <a href="/men" class="text-[#6b6b6b] hover:text-[#1a1a1a]">MEN</a>
+          <span class="text-[#e5e5e5]">/</span>
+          <a href="/women" class="text-[#1a1a1a] font-medium" aria-current="page">WOMEN</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-[1fr_40%] gap-10 lg:gap-12 xl:gap-16">
+          <!-- Image panel -->
+          <div class="order-1 lg:order-none lg:col-start-1 lg:row-span-1 lg:sticky lg:top-28 lg:self-start">
+            <figure
+              id="image-stage"
+              class="relative mx-auto aspect-[9/16] max-h-[60vh] lg:max-h-[75vh] w-full max-w-md lg:max-w-none overflow-hidden"
+            >
+              <!-- Placeholder image -->
+              <img
+                id="image-placeholder"
+                src="../placeholder.jpeg"
+                alt="コーディネート例"
+                class="absolute inset-0 w-full h-full object-contain"
+              />
+
+              <!-- Result image -->
+              <img
+                id="result-image"
+                src=""
+                alt="生成されたコーディネート"
+                class="hidden absolute inset-0 w-full h-full object-contain"
+              />
+
+              <!-- Placeholder caption -->
+              <div
+                id="image-caption"
+                class="absolute inset-0 flex items-center justify-center bg-white/60 pointer-events-none"
+              >
+                <p class="px-6 py-3 bg-white/90 rounded-sm text-sm text-[#6b6b6b] tracking-wide">
+                  ここに提案画像が表示されます
+                </p>
+              </div>
+            </figure>
+          </div>
+
+          <!-- Right column -->
+          <div class="order-2 lg:order-none lg:col-start-2 flex flex-col gap-4">
+            <!-- Intro panel -->
+            <div class="order-4 lg:order-none">
+              <div class="max-w-xl lg:max-w-none mx-auto">
+                <div class="mb-0 lg:mb-6">
+                  <p class="text-xs tracking-widest text-[#6b6b6b] uppercase mb-2">FitFlux Fitting Room</p>
+                  <h1 class="font-display text-3xl sm:text-4xl text-[#1a1a1a] leading-tight">
+                    初夏のコーディネートを提案
+                  </h1>
+                  <p class="mt-3 text-[#6b6b6b] text-sm leading-relaxed">
+                    ブラウスとパンツの色を選ぶと、トータルバランスを考慮したレディースコーディネートを提案します。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form / Details panel -->
+            <div class="order-2 lg:order-none lg:w-full">
+              <div class="max-w-xl lg:max-w-none mx-auto">
+                <!-- Input form -->
+                <form id="fitflux-form" class="space-y-4">
+                  <div class="border-t border-[#e5e5e5] pt-5">
+                    <h2 class="text-xs tracking-widest text-[#6b6b6b] uppercase mb-4">Select your items</h2>
+                    <div id="form-fields" class="space-y-3">
+                      <!-- Fields are generated by JS -->
+                    </div>
+                  </div>
+                </form>
+
+                <!-- Result actions -->
+                <div id="result-section" class="hidden mt-6 space-y-4">
+                  <details class="border-t border-[#e5e5e5] pt-4 group">
+                    <summary
+                      class="flex items-center justify-between cursor-pointer text-sm text-[#6b6b6b] hover:text-[#1a1a1a] transition"
+                    >
+                    </summary>
+                    <p
+                      id="result-prompt"
+                      class="mt-3 text-xs text-[#6b6b6b] leading-relaxed font-mono break-words"
+                    ></p>
+                  </details>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coming soon items -->
+            <div class="order-3 lg:order-none pb-10">
+              <div class="max-w-xl lg:max-w-none mx-auto">
+                <div class="space-y-3 pt-3 border-t border-dashed border-[#e5e5e5]">
+                  <h3 class="text-xs tracking-widest text-[#6b6b6b] uppercase">UPCOMING ITEMS</h3>
+
+                  <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                    <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">キャップ</label>
+                    <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
+                      <option>白</option>
+                    </select>
+                    <input type="text" disabled value="Cap" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                    <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  </div>
+
+                  <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                    <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">アイウェア</label>
+                    <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
+                      <option>白</option>
+                    </select>
+                    <input type="text" disabled value="Sunglasses" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                    <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  </div>
+
+                  <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                    <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">上着</label>
+                    <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
+                      <option>白</option>
+                    </select>
+                    <input type="text" disabled value="Jacket" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                    <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  </div>
+
+                  <div class="flex gap-2 sm:gap-3 items-center opacity-60">
+                    <label class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">シューズ</label>
+                    <select disabled class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed">
+                      <option>白</option>
+                    </select>
+                    <input type="text" disabled value="Sneakers" class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed" />
+                    <span class="shrink-0 text-[10px] tracking-wide text-[#6b6b6b] border border-[#e5e5e5] rounded-full px-2 py-0.5 whitespace-nowrap">準備中</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#e5e5e5] bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <p class="max-w-2xl mx-auto text-center text-[10px] leading-relaxed text-[#6b6b6b]">
+          本サービスで表示される画像は AI（Gemini）による生成物です。<br class="hidden sm:block" />
+          画像の権利関係は各モデルのライセンスに従います。個人利用に限り自由に使用可能ですが、商用利用の可否は各モデルのライセンス条項をご確認ください。
+        </p>
+      </div>
+    </footer>
+
+    <!-- Error toast -->
+    <div
+      id="error-toast"
+      class="fixed top-4 left-4 right-4 max-w-md mx-auto bg-white border border-[#e5e5e5] text-[#1a1a1a] px-4 py-3 rounded-sm shadow-lg transform -translate-y-full opacity-0 transition-all duration-300 z-50"
+      role="alert"
+    >
+      <p id="error-message" class="text-sm"></p>
+    </div>
+
+    <script type="module">
+      import { getConfig } from '../scripts/outfit-config.mjs';
+
+      const GENDER = 'women';
+      const config = getConfig(GENDER);
+      const CATEGORIES = config.categories;
+      const DEFAULT_COLORS = config.defaultColors;
+      const COLORS = config.colors;
+
+      const form = document.getElementById('fitflux-form');
+      const formFields = document.getElementById('form-fields');
+      const resultSection = document.getElementById('result-section');
+      const resultImage = document.getElementById('result-image');
+      const resultPrompt = document.getElementById('result-prompt');
+      const errorToast = document.getElementById('error-toast');
+      const errorMessage = document.getElementById('error-message');
+      const imagePlaceholder = document.getElementById('image-placeholder');
+      const imageCaption = document.getElementById('image-caption');
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorToast.classList.remove('-translate-y-full', 'opacity-0');
+        setTimeout(() => {
+          errorToast.classList.add('-translate-y-full', 'opacity-0');
+        }, 5000);
+      }
+
+      function updateSelection() {
+        const formData = new FormData(form);
+        const topsColor = String(formData.get('tops_color') || DEFAULT_COLORS.tops);
+        const pantsColor = String(formData.get('pants_color') || DEFAULT_COLORS.pants);
+
+        const fileName = `${topsColor}-${pantsColor}.webp`;
+        const imagePath = `/generated/women/${fileName}`;
+        const prompt =
+          `A full-body photo of a young woman standing straight, facing the camera, ` +
+          `shot from head to toe, ` +
+          `wearing a ${topsColor} short sleeve blouse and ${pantsColor} wide pants. ` +
+          `Summer outfit, clean light background, natural lighting, realistic. ` +
+          `Full body, head to toe, entire head and hair visible, ` +
+          `do not crop the head or feet, female model.`;
+
+        resultImage.src = imagePath;
+        resultPrompt.textContent = prompt;
+        resultSection.classList.remove('hidden');
+
+        // 画像の読み込み状態を UI で表現
+        resultImage.classList.add('hidden');
+        imagePlaceholder.classList.remove('hidden');
+        imageCaption.classList.remove('hidden');
+
+        const tempImage = new Image();
+        tempImage.src = imagePath;
+        tempImage.onload = () => {
+          resultImage.classList.remove('hidden');
+          imagePlaceholder.classList.add('hidden');
+          imageCaption.classList.add('hidden');
+        };
+        tempImage.onerror = () => {
+          showError(`画像の読み込みに失敗しました（${fileName}）。`);
+        };
+      }
+
+      function renderFields() {
+        formFields.innerHTML = CATEGORIES.map((cat) => {
+          const colorOptions = COLORS.map(
+            (c) =>
+              ` <option value="${c.value}"${DEFAULT_COLORS[cat.key] === c.value ? ' selected' : ''}>${c.label}</option>`
+          ).join('');
+
+          return `
+            <div class="flex gap-2 sm:gap-3 items-center">
+              <label for="${cat.key}" class="w-14 sm:w-16 shrink-0 text-xs sm:text-sm text-[#1a1a1a] font-medium">${cat.label}</label>
+              <select
+                id="${cat.key}_color"
+                name="${cat.key}_color"
+                class="w-20 sm:w-24 shrink-0 rounded-sm border border-[#e5e5e5] bg-white px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#1a1a1a] focus:border-[#1a1a1a] focus:ring-1 focus:ring-[#1a1a1a] outline-none transition"
+              >
+                ${colorOptions}
+              </select>
+              <input
+                type="text"
+                id="${cat.key}"
+                name="${cat.key}"
+                readonly
+                value="${cat.value}"
+                class="min-w-0 flex-1 truncate rounded-sm border border-[#e5e5e5] bg-[#f7f7f7] px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm text-[#6b6b6b] cursor-not-allowed opacity-60"
+              />
+            </div>
+          `;
+        }).join('');
+
+        for (const cat of CATEGORIES) {
+          const colorSelect = document.getElementById(`${cat.key}_color`);
+          if (colorSelect) {
+            colorSelect.addEventListener('change', updateSelection);
+          }
+        }
+      }
+
+      renderFields();
+      updateSelection();
+    </script>
+  </body>
+</html>

@@ -6,6 +6,8 @@
  *   npm run generate
  *   npm run generate -- --limit 1
  *   npm run generate -- --force
+ *   npm run generate:women
+ *   npm run generate:women -- --limit 1
  */
 
 import fs from 'node:fs/promises';
@@ -17,16 +19,15 @@ import pLimit from 'p-limit';
 import sharp from 'sharp';
 import {
   getAllCombinations,
-  getFileName,
-  buildPrompt,
+  getFileNameForGender,
+  buildPromptForGender,
 } from './outfit-config.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const OUTPUT_DIR = path.join(PROJECT_ROOT, 'generated');
-const MANIFEST_PATH = path.join(OUTPUT_DIR, 'manifest.json');
-const FAILED_PATH = path.join(OUTPUT_DIR, 'failed.json');
+
+/** @typedef {import('./outfit-config.mjs').Gender} Gender */
 
 // Gemini から取得した正方形画像を縦長 9:16 にクロップ・リサイズする際の目標サイズ
 const TARGET_WIDTH = 576;
@@ -37,6 +38,7 @@ const TARGET_HEIGHT = 1024;
  * @property {number} limit
  * @property {boolean} force
  * @property {number} variations
+ * @property {boolean} women
  */
 
 /**
@@ -76,7 +78,37 @@ function parseArgs() {
     limit: Number(args.find((/** @type {string} */ _, /** @type {number} */ i) => args[i - 1] === '--limit')) || 0,
     force: args.includes('--force'),
     variations: Number(args.find((/** @type {string} */ _, /** @type {number} */ i) => args[i - 1] === '--variations')) || 1,
+    women: args.includes('--women'),
   };
+}
+
+/**
+ * @param {CliArgs} args
+ * @returns {Gender}
+ */
+function getGenderFromArgs(args) {
+  return args.women ? 'women' : 'men';
+}
+
+/**
+ * @param {Gender} gender
+ */
+function getOutputDir(gender) {
+  return path.join(PROJECT_ROOT, 'generated', gender === 'women' ? 'women' : '');
+}
+
+/**
+ * @param {Gender} gender
+ */
+function getManifestPath(gender) {
+  return path.join(getOutputDir(gender), 'manifest.json');
+}
+
+/**
+ * @param {Gender} gender
+ */
+function getFailedPath(gender) {
+  return path.join(getOutputDir(gender), 'failed.json');
 }
 
 async function loadEnv() {
@@ -94,13 +126,20 @@ async function loadEnv() {
   }
 }
 
-async function ensureOutputDir() {
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
+/**
+ * @param {Gender} gender
+ */
+async function ensureOutputDir(gender) {
+  await fs.mkdir(getOutputDir(gender), { recursive: true });
 }
 
-async function loadManifest() {
+/**
+ * @param {Gender} gender
+ */
+async function loadManifest(gender) {
+  const manifestPath = getManifestPath(gender);
   try {
-    const raw = await fs.readFile(MANIFEST_PATH, 'utf-8');
+    const raw = await fs.readFile(manifestPath, 'utf-8');
     return JSON.parse(raw);
   } catch {
     return { version: 1, images: /** @type {Record<string, ManifestImage>} */ ({}) };
@@ -108,15 +147,20 @@ async function loadManifest() {
 }
 
 /**
+ * @param {Gender} gender
  * @param {Manifest} manifest
  */
-async function saveManifest(manifest) {
-  await fs.writeFile(MANIFEST_PATH, JSON.stringify(manifest, null, 2));
+async function saveManifest(gender, manifest) {
+  await fs.writeFile(getManifestPath(gender), JSON.stringify(manifest, null, 2));
 }
 
-async function loadFailed() {
+/**
+ * @param {Gender} gender
+ */
+async function loadFailed(gender) {
+  const failedPath = getFailedPath(gender);
   try {
-    const raw = await fs.readFile(FAILED_PATH, 'utf-8');
+    const raw = await fs.readFile(failedPath, 'utf-8');
     return JSON.parse(raw);
   } catch {
     return /** @type {FailedEntry[]} */ ([]);
@@ -124,10 +168,11 @@ async function loadFailed() {
 }
 
 /**
+ * @param {Gender} gender
  * @param {FailedEntry[]} failed
  */
-async function saveFailed(failed) {
-  await fs.writeFile(FAILED_PATH, JSON.stringify(failed, null, 2));
+async function saveFailed(gender, failed) {
+  await fs.writeFile(getFailedPath(gender), JSON.stringify(failed, null, 2));
 }
 
 /**
@@ -182,17 +227,19 @@ async function cropAndSave(inputBuffer, outputPath) {
 
 /**
  * @param {Combination} combination
+ * @param {Gender} gender
  * @param {{ manifest: Manifest; failed: FailedEntry[]; force: boolean; variations: number }} ctx
  */
-async function processCombination(combination, { manifest, failed, force, variations }) {
+async function processCombination(combination, gender, { manifest, failed, force, variations }) {
   const { topsColor, pantsColor } = combination;
-  const baseFileName = getFileName(topsColor, pantsColor);
-  const basePrompt = buildPrompt(topsColor, pantsColor);
+  const outputDir = getOutputDir(gender);
+  const baseFileName = getFileNameForGender(gender, topsColor, pantsColor);
+  const basePrompt = buildPromptForGender(gender, topsColor, pantsColor);
   const results = [];
 
   for (let i = 1; i <= variations; i++) {
-    const fileName = variations > 1 ? `${topsColor}-${pantsColor}-v${i}.webp` : baseFileName;
-    const outputPath = path.join(OUTPUT_DIR, fileName);
+    const fileName = variations > 1 ? `${topsColor}-${pantsColor}-v${i}.webp` : path.basename(baseFileName);
+    const outputPath = path.join(outputDir, fileName);
     const prompt = variations > 1 ? `${basePrompt} (variation ${i})` : basePrompt;
 
     if (!force) {
@@ -211,11 +258,12 @@ async function processCombination(combination, { manifest, failed, force, variat
       const imageBuffer = await generateImage(prompt);
       await cropAndSave(imageBuffer, outputPath);
 
+      const relativePath = gender === 'women' ? `/generated/women/${fileName}` : `/generated/${fileName}`;
       manifest.images[fileName] = {
         topsColor,
         pantsColor,
         prompt,
-        path: `/generated/${fileName}`,
+        path: relativePath,
         updatedAt: new Date().toISOString(),
       };
 
@@ -240,22 +288,24 @@ async function processCombination(combination, { manifest, failed, force, variat
 }
 
 async function main() {
-  const { limit, force, variations } = parseArgs();
+  const args = parseArgs();
+  const gender = getGenderFromArgs(args);
+  const { limit, force, variations } = args;
   await loadEnv();
 
-  await ensureOutputDir();
+  await ensureOutputDir(gender);
 
-  const manifest = await loadManifest();
-  const failed = await loadFailed();
-  const combinations = getAllCombinations();
+  const manifest = await loadManifest(gender);
+  const failed = await loadFailed(gender);
+  const combinations = getAllCombinations(gender);
   const targetCombinations = limit > 0 ? combinations.slice(0, limit) : combinations;
 
-  console.log(`生成対象: ${targetCombinations.length} 組 × ${variations} バリエーション`);
+  console.log(`生成対象: ${targetCombinations.length} 組 × ${variations} バリエーション (${gender})`);
 
   const throttle = pLimit(2);
   const nestedResults = await Promise.all(
     targetCombinations.map((combination) =>
-      throttle(() => processCombination(combination, { manifest, failed, force, variations }))
+      throttle(() => processCombination(combination, gender, { manifest, failed, force, variations }))
     )
   );
 
@@ -264,8 +314,8 @@ async function main() {
   const skipped = results.filter((r) => r.status === 'skipped').length;
   const failedCount = results.filter((r) => r.status === 'failed').length;
 
-  await saveManifest(manifest);
-  await saveFailed(failed);
+  await saveManifest(gender, manifest);
+  await saveFailed(gender, failed);
 
   console.log('');
   console.log(`生成: ${generated} 枚`);

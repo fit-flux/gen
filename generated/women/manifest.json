@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "images": {
+    "white-white.webp": {
+      "topsColor": "white",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-white.webp",
+      "updatedAt": "2026-07-07T08:21:15.695Z"
+    },
+    "white-beige.webp": {
+      "topsColor": "white",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-beige.webp",
+      "updatedAt": "2026-07-07T08:21:38.930Z"
+    },
+    "white-gray.webp": {
+      "topsColor": "white",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-gray.webp",
+      "updatedAt": "2026-07-07T08:21:40.539Z"
+    },
+    "white-brown.webp": {
+      "topsColor": "white",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-brown.webp",
+      "updatedAt": "2026-07-07T08:21:49.269Z"
+    },
+    "white-black.webp": {
+      "topsColor": "white",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-black.webp",
+      "updatedAt": "2026-07-07T08:21:50.620Z"
+    },
+    "white-green.webp": {
+      "topsColor": "white",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-green.webp",
+      "updatedAt": "2026-07-07T08:21:58.083Z"
+    },
+    "white-blue.webp": {
+      "topsColor": "white",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a white short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/white-blue.webp",
+      "updatedAt": "2026-07-07T08:21:58.706Z"
+    },
+    "gray-white.webp": {
+      "topsColor": "gray",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-white.webp",
+      "updatedAt": "2026-07-07T08:22:05.606Z"
+    },
+    "gray-gray.webp": {
+      "topsColor": "gray",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-gray.webp",
+      "updatedAt": "2026-07-07T08:22:07.462Z"
+    },
+    "gray-beige.webp": {
+      "topsColor": "gray",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-beige.webp",
+      "updatedAt": "2026-07-07T08:22:14.766Z"
+    },
+    "gray-brown.webp": {
+      "topsColor": "gray",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-brown.webp",
+      "updatedAt": "2026-07-07T08:22:17.059Z"
+    },
+    "gray-blue.webp": {
+      "topsColor": "gray",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-blue.webp",
+      "updatedAt": "2026-07-07T08:22:24.692Z"
+    },
+    "gray-black.webp": {
+      "topsColor": "gray",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-black.webp",
+      "updatedAt": "2026-07-07T08:22:26.638Z"
+    },
+    "beige-white.webp": {
+      "topsColor": "beige",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-white.webp",
+      "updatedAt": "2026-07-07T08:22:33.971Z"
+    },
+    "gray-green.webp": {
+      "topsColor": "gray",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a gray short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/gray-green.webp",
+      "updatedAt": "2026-07-07T08:22:34.161Z"
+    },
+    "beige-gray.webp": {
+      "topsColor": "beige",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-gray.webp",
+      "updatedAt": "2026-07-07T08:22:42.467Z"
+    },
+    "beige-beige.webp": {
+      "topsColor": "beige",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-beige.webp",
+      "updatedAt": "2026-07-07T08:22:42.613Z"
+    },
+    "beige-black.webp": {
+      "topsColor": "beige",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-black.webp",
+      "updatedAt": "2026-07-07T08:22:51.010Z"
+    },
+    "beige-brown.webp": {
+      "topsColor": "beige",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-brown.webp",
+      "updatedAt": "2026-07-07T08:22:51.308Z"
+    },
+    "beige-green.webp": {
+      "topsColor": "beige",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-green.webp",
+      "updatedAt": "2026-07-07T08:22:59.111Z"
+    },
+    "beige-blue.webp": {
+      "topsColor": "beige",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a beige short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/beige-blue.webp",
+      "updatedAt": "2026-07-07T08:23:00.086Z"
+    },
+    "brown-white.webp": {
+      "topsColor": "brown",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-white.webp",
+      "updatedAt": "2026-07-07T08:23:06.538Z"
+    },
+    "brown-gray.webp": {
+      "topsColor": "brown",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-gray.webp",
+      "updatedAt": "2026-07-07T08:23:09.133Z"
+    },
+    "brown-beige.webp": {
+      "topsColor": "brown",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-beige.webp",
+      "updatedAt": "2026-07-07T08:23:16.279Z"
+    },
+    "brown-brown.webp": {
+      "topsColor": "brown",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-brown.webp",
+      "updatedAt": "2026-07-07T08:23:17.167Z"
+    },
+    "brown-black.webp": {
+      "topsColor": "brown",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-black.webp",
+      "updatedAt": "2026-07-07T08:23:24.350Z"
+    },
+    "brown-blue.webp": {
+      "topsColor": "brown",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-blue.webp",
+      "updatedAt": "2026-07-07T08:23:25.795Z"
+    },
+    "brown-green.webp": {
+      "topsColor": "brown",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a brown short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/brown-green.webp",
+      "updatedAt": "2026-07-07T08:23:31.755Z"
+    },
+    "black-white.webp": {
+      "topsColor": "black",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-white.webp",
+      "updatedAt": "2026-07-07T08:23:34.470Z"
+    },
+    "black-gray.webp": {
+      "topsColor": "black",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-gray.webp",
+      "updatedAt": "2026-07-07T08:23:40.741Z"
+    },
+    "black-beige.webp": {
+      "topsColor": "black",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-beige.webp",
+      "updatedAt": "2026-07-07T08:23:40.761Z"
+    },
+    "black-brown.webp": {
+      "topsColor": "black",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-brown.webp",
+      "updatedAt": "2026-07-07T08:23:48.317Z"
+    },
+    "black-black.webp": {
+      "topsColor": "black",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-black.webp",
+      "updatedAt": "2026-07-07T08:23:48.704Z"
+    },
+    "black-blue.webp": {
+      "topsColor": "black",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-blue.webp",
+      "updatedAt": "2026-07-07T08:23:54.767Z"
+    },
+    "black-green.webp": {
+      "topsColor": "black",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a black short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/black-green.webp",
+      "updatedAt": "2026-07-07T08:23:57.573Z"
+    },
+    "blue-white.webp": {
+      "topsColor": "blue",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-white.webp",
+      "updatedAt": "2026-07-07T08:24:02.452Z"
+    },
+    "blue-gray.webp": {
+      "topsColor": "blue",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-gray.webp",
+      "updatedAt": "2026-07-07T08:24:06.308Z"
+    },
+    "blue-beige.webp": {
+      "topsColor": "blue",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-beige.webp",
+      "updatedAt": "2026-07-07T08:24:11.533Z"
+    },
+    "blue-brown.webp": {
+      "topsColor": "blue",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-brown.webp",
+      "updatedAt": "2026-07-07T08:24:12.652Z"
+    },
+    "blue-black.webp": {
+      "topsColor": "blue",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-black.webp",
+      "updatedAt": "2026-07-07T08:24:21.911Z"
+    },
+    "blue-blue.webp": {
+      "topsColor": "blue",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-blue.webp",
+      "updatedAt": "2026-07-07T08:24:22.358Z"
+    },
+    "green-white.webp": {
+      "topsColor": "green",
+      "pantsColor": "white",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and white wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-white.webp",
+      "updatedAt": "2026-07-07T08:24:29.870Z"
+    },
+    "blue-green.webp": {
+      "topsColor": "blue",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a blue short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/blue-green.webp",
+      "updatedAt": "2026-07-07T08:24:31.039Z"
+    },
+    "green-beige.webp": {
+      "topsColor": "green",
+      "pantsColor": "beige",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and beige wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-beige.webp",
+      "updatedAt": "2026-07-07T08:24:37.747Z"
+    },
+    "green-gray.webp": {
+      "topsColor": "green",
+      "pantsColor": "gray",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and gray wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-gray.webp",
+      "updatedAt": "2026-07-07T08:24:39.463Z"
+    },
+    "green-brown.webp": {
+      "topsColor": "green",
+      "pantsColor": "brown",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and brown wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-brown.webp",
+      "updatedAt": "2026-07-07T08:24:45.349Z"
+    },
+    "green-black.webp": {
+      "topsColor": "green",
+      "pantsColor": "black",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and black wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-black.webp",
+      "updatedAt": "2026-07-07T08:24:47.910Z"
+    },
+    "green-blue.webp": {
+      "topsColor": "green",
+      "pantsColor": "blue",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and blue wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-blue.webp",
+      "updatedAt": "2026-07-07T08:24:53.884Z"
+    },
+    "green-green.webp": {
+      "topsColor": "green",
+      "pantsColor": "green",
+      "prompt": "A full-body photo of a young woman standing straight, facing the camera, shot from head to toe, wearing a green short sleeve blouse and green wide pants. Summer outfit, clean light background, natural lighting, realistic. Full body, head to toe, entire head and hair visible, do not crop the head or feet, female model.",
+      "path": "/generated/women/green-green.webp",
+      "updatedAt": "2026-07-07T08:24:57.066Z"
+    }
+  }
+}
